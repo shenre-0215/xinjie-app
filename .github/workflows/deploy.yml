@@ -18,19 +18,21 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'npm'
 
       - name: Install dependencies
-        working-directory: 心解/h5-preview
-        run: npm install
+        run: |
+          cd "心解/h5-preview"
+          npm install
 
       - name: Build project
-        working-directory: 心解/h5-preview
-        run: npm run build
+        run: |
+          cd "心解/h5-preview"
+          npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./心解/h5-preview/dist
+          publish_dir: "./心解/h5-preview/dist"

@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -19,20 +20,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
-          cache: 'npm'
 
-      - name: Install dependencies
+      - name: Install and build
         run: |
-          cd "心解/h5-preview"
+          ls -la
+          cd "心解" && ls -la
+          cd "h5-preview" && ls -la
           npm install
-
-      - name: Build project
-        run: |
-          cd "心解/h5-preview"
           npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: "./心解/h5-preview/dist"
+          publish_dir: ./心解/h5-preview/dist

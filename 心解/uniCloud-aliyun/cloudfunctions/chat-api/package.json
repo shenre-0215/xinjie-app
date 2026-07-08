@@ -1,0 +1,7 @@
+{
+  "name": "chat-api",
+  "version": "1.0.0",
+  "description": "心宝对话云函数 — 代理 DeepSeek API",
+  "main": "index.js",
+  "dependencies": {}
+}

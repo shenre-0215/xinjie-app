@@ -1,0 +1,147 @@
+{
+	"pages": [
+		{
+			"path": "pages/zhiji/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/xinbao/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/xinwang/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/zhiguang/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/mine/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/zhiji/diary-edit",
+			"style": { "navigationStyle": "custom" }
+		},
+		{
+			"path": "pages/zhiji/thinking-chain",
+			"style": { "navigationStyle": "custom" }
+		},
+		{
+			"path": "pages/zhiji/suspend-list",
+			"style": { "navigationStyle": "custom" }
+		},
+		{
+			"path": "pages/zhiji/insights",
+			"style": { "navigationStyle": "custom" }
+		},
+		{
+			"path": "pages/zhiji/echoes",
+			"style": { "navigationStyle": "custom" }
+		},
+		{
+			"path": "pages/zhiji/record-detail",
+			"style": { "navigationStyle": "custom" }
+		},
+		{
+			"path": "pages/xinbao/history",
+			"style": { "navigationStyle": "custom" }
+		},
+		{
+			"path": "pages/xinbao/settings",
+			"style": { "navigationStyle": "custom" }
+		},
+		{
+			"path": "pages/xinwang/worldview",
+			"style": { "navigationStyle": "custom" }
+		},
+		{
+			"path": "pages/xinwang/node-detail",
+			"style": { "navigationStyle": "custom" }
+		},
+		{
+			"path": "pages/zhiguang/publish",
+			"style": { "navigationStyle": "custom" }
+		},
+		{
+			"path": "pages/zhiguang/detail",
+			"style": { "navigationStyle": "custom" }
+		},
+		{
+			"path": "pages/mine/profile-edit",
+			"style": { "navigationStyle": "custom" }
+		},
+		{
+			"path": "pages/mine/growth",
+			"style": { "navigationStyle": "custom" }
+		},
+		{
+			"path": "pages/mine/settings",
+			"style": { "navigationStyle": "custom" }
+		},
+		{
+			"path": "pages/mine/favorites",
+			"style": { "navigationStyle": "custom" }
+		},
+		{
+			"path": "pages/mine/feedback",
+			"style": { "navigationStyle": "custom" }
+		},
+		{
+			"path": "pages/mine/about",
+			"style": { "navigationStyle": "custom" }
+		},
+		{
+			"path": "pages/mine/login",
+			"style": { "navigationStyle": "custom" }
+		}
+	],
+	"tabBar": {
+		"custom": true,
+		"color": "#414943",
+		"selectedColor": "#3d6751",
+		"backgroundColor": "#ffffff",
+		"borderStyle": "white",
+		"list": [
+			{
+				"pagePath": "pages/zhiji/index",
+				"text": "织记"
+			},
+			{
+				"pagePath": "pages/xinbao/index",
+				"text": "心宝"
+			},
+			{
+				"pagePath": "pages/xinwang/index",
+				"text": "心网"
+			},
+			{
+				"pagePath": "pages/zhiguang/index",
+				"text": "织光"
+			},
+			{
+				"pagePath": "pages/mine/index",
+				"text": "我的"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationStyle": "custom",
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "心解",
+		"navigationBarBackgroundColor": "#f9faf6",
+		"backgroundColor": "#f9faf6"
+	},
+	"uniIdRouter": {}
+}

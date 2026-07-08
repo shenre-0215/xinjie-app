@@ -1,0 +1,19 @@
+{
+  "bsonType": "object",
+  "required": ["uid"],
+  "permission": {
+    "read": "doc.uid == auth.uid",
+    "create": "doc.uid == auth.uid",
+    "update": "doc.uid == auth.uid",
+    "delete": "doc.uid == auth.uid"
+  },
+  "properties": {
+    "uid": { "bsonType": "string", "description": "所属用户 uid" },
+    "worldview": {
+      "bsonType": "object",
+      "description": "三观体系 { shixiang, woxing, xincheng }"
+    },
+    "createdAt": { "bsonType": "timestamp" },
+    "updatedAt": { "bsonType": "timestamp" }
+  }
+}

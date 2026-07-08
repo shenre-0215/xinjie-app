@@ -1,0 +1,280 @@
+<!-- 心宝 - 对话页 (中文版) -->
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>心宝 (Xin Bao)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Nunito+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#efe2bb",
+                    "primary-fixed": "#bfedd1",
+                    "on-surface-variant": "#414943",
+                    "secondary-fixed-dim": "#d3c6a0",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f3f4f0",
+                    "secondary-container": "#eddfb8",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#dcbfcb",
+                    "outline": "#717973",
+                    "surface-tint": "#3d6751",
+                    "primary-fixed-dim": "#a4d1b6",
+                    "on-secondary-fixed-variant": "#4f4629",
+                    "on-secondary-fixed": "#211b04",
+                    "surface-variant": "#e2e3df",
+                    "on-primary-container": "#345d48",
+                    "tertiary-fixed": "#f9dbe7",
+                    "surface-container-high": "#e8e8e5",
+                    "on-primary-fixed-variant": "#254f3a",
+                    "on-tertiary-fixed": "#27161f",
+                    "on-primary-fixed": "#002113",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed-variant": "#56414b",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#6f5862",
+                    "surface-container-highest": "#e2e3df",
+                    "inverse-surface": "#2f312f",
+                    "background": "#f9faf6",
+                    "surface-bright": "#f9faf6",
+                    "on-tertiary-container": "#654f59",
+                    "on-background": "#1a1c1a",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#e0c3cf",
+                    "inverse-primary": "#a4d1b6",
+                    "on-secondary-container": "#6c6243",
+                    "surface": "#f9faf6",
+                    "inverse-on-surface": "#f0f1ed",
+                    "on-surface": "#1a1c1a",
+                    "surface-dim": "#d9dad7",
+                    "primary": "#3d6751",
+                    "secondary": "#675e3f",
+                    "primary-container": "#a8d5ba",
+                    "outline-variant": "#c1c8c1",
+                    "surface-container": "#edeeeb"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "safe-bottom": "34px",
+                    "safe-top": "88px",
+                    "inline-gap": "12px",
+                    "page-margin": "32px",
+                    "stack-gap": "16px",
+                    "module-gap": "28px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Nunito Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Nunito Sans"],
+                    "label-md": ["Nunito Sans"],
+                    "headline-sm": ["Plus Jakarta Sans"],
+                    "label-sm": ["Nunito Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["22px", {"lineHeight": "30px", "fontWeight": "600"}],
+                    "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["17px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-sm": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9faf6; /* Milk Apricot White */
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Nunito Sans', sans-serif;
+        }
+        .healing-shadow {
+            box-shadow: 0px 4px 20px rgba(168, 213, 186, 0.08);
+        }
+        .chat-container {
+            height: calc(100vh - 160px);
+            scrollbar-width: none;
+        }
+        .chat-container::-webkit-scrollbar {
+            display: none;
+        }
+        .bubble-left {
+            border-bottom-left-radius: 4px;
+        }
+        .bubble-right {
+            border-bottom-right-radius: 4px;
+        }
+        .active-press {
+            transition: transform 0.2s;
+        }
+        .active-press:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen text-on-background">
+<!-- Back to index -->
+<div style="position:fixed;top:10px;left:10px;z-index:9999;background:rgba(255,255,255,0.9);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+  <a href="index.html" style="text-decoration:none;font-size:20px;color:#3d6751;" title="返回列表">☰</a>
+</div>
+
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md px-page-margin h-20 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-primary-container/20 flex items-center justify-center">
+<img alt="心宝" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCZMVW5wvMG62vjxsPx3nqosetVhFM-QG5r2XORlwoPgkbez0esfSG49bwSYIOoDk1sYUgeE0Q_wuJOEYOtEykf204PArWB48jX5KH_onSQNaFIh09sz_ot4TP5b1sxGndVw3LP_izS1lZroaaWNDxmm7QnvaeEYLNJ5w33sYVSOjF0Y_dMhk4djeed7-GS2AdL7SzM7ZwzV-6bei-UN_Cp0sD6f9kNI7X5F5P9pIKbfGSGsmlKX2XI6aIM8PbKfg3nOqTlOHHPEME"/>
+</div>
+<h1 class="font-display-lg text-headline-md text-primary">心宝</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant active-press">history</button>
+<button class="material-symbols-outlined text-on-surface-variant active-press">more_horiz</button>
+</div>
+</header>
+<!-- Chat Body -->
+<main class="flex-1 mt-20 mb-24 px-page-margin overflow-y-auto chat-container space-y-stack-gap pt-6">
+<!-- Xin Bao Message -->
+<div class="flex items-end gap-3 max-w-[85%]">
+<div class="w-8 h-8 rounded-full bg-primary-container/30 flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">face</span>
+</div>
+<div class="bg-surface-container-lowest px-5 py-4 rounded-lg bubble-left healing-shadow">
+<p class="font-body-md text-on-surface">你好呀。我是心宝。今天过得怎么样？无论开心还是疲惫，我都在这里陪着你。</p>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex flex-col items-end gap-1">
+<div class="bg-primary-container/40 px-5 py-4 rounded-lg bubble-right max-w-[80%]">
+<p class="font-body-md text-on-primary-container">今天有点压力，想找人说说话。</p>
+</div>
+<span class="text-label-sm text-on-surface-variant/40 mr-2">14:20</span>
+</div>
+<!-- Xin Bao Message + Selection Cards -->
+<div class="flex flex-col gap-4 max-w-[90%]">
+<div class="flex items-end gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container/30 flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">face</span>
+</div>
+<div class="bg-surface-container-lowest px-5 py-4 rounded-lg bubble-left healing-shadow">
+<p class="font-body-md text-on-surface">辛苦啦。深呼吸一下，我们慢慢来。你想尝试哪种方式来舒缓一下心情呢？</p>
+</div>
+</div>
+<!-- Three Path Selection Cards -->
+<div class="grid grid-cols-1 gap-4 pl-11">
+<!-- Card 1: Listening -->
+<button class="w-full text-left bg-surface-container-lowest p-5 rounded-lg healing-shadow active-press flex items-center gap-4 group">
+<div class="w-12 h-12 rounded-full bg-secondary-container/40 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[28px]">eco</span>
+</div>
+<div class="flex-1">
+<h4 class="font-headline-sm text-on-surface">静心倾听</h4>
+<p class="font-label-md text-on-surface-variant">只是想找个安全的地方，静静地诉说。</p>
+</div>
+<span class="material-symbols-outlined text-primary-container opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</button>
+<!-- Card 2: Guidance -->
+<button class="w-full text-left bg-surface-container-lowest p-5 rounded-lg healing-shadow active-press flex items-center gap-4 group">
+<div class="w-12 h-12 rounded-full bg-tertiary-container/40 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[28px]">auto_awesome</span>
+</div>
+<div class="flex-1">
+<h4 class="font-headline-sm text-on-surface">温柔引导</h4>
+<p class="font-label-md text-on-surface-variant">带我做个简单的冥想或书写练习。</p>
+</div>
+<span class="material-symbols-outlined text-primary-container opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</button>
+<!-- Card 3: Deep Dive -->
+<button class="w-full text-left bg-surface-container-lowest p-5 rounded-lg healing-shadow active-press flex items-center gap-4 group">
+<div class="w-12 h-12 rounded-full bg-primary-fixed/40 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]">psychology_alt</span>
+</div>
+<div class="flex-1">
+<h4 class="font-headline-sm text-on-surface">深度觉察</h4>
+<p class="font-label-md text-on-surface-variant">一起探索压力背后的情绪根源。</p>
+</div>
+<span class="material-symbols-outlined text-primary-container opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Bottom Input Area -->
+<footer class="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-lg px-page-margin pb-safe-bottom pt-4 h-auto min-h-[80px]">
+<div class="flex items-center gap-3 mb-2">
+<!-- Import Zhi Ji Button -->
+<button class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center active-press text-on-surface-variant group" title="导入织记">
+<span class="material-symbols-outlined group-active:text-primary transition-colors">folder_open</span>
+</button>
+<!-- Input Field Container -->
+<div class="flex-1 bg-surface-container-high rounded-lg flex items-center px-4 py-1 h-12">
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-body-md text-on-surface placeholder:text-on-surface-variant/40" placeholder="跟心宝说说吧..." type="text"/>
+<button class="material-symbols-outlined text-on-surface-variant/60 ml-2">sentiment_satisfied</button>
+</div>
+<!-- Send Button -->
+<button class="w-12 h-12 rounded-full bg-primary flex items-center justify-center active-press text-on-primary shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+<!-- Subtle Hint -->
+<div class="flex justify-center pb-2">
+<span class="text-[10px] text-on-surface-variant/30 tracking-widest uppercase">陪伴你的治愈之旅</span>
+</div>
+</footer>
+<!-- Bottom Navigation Component -->
+<nav class="fixed bottom-0 w-full z-[60] flex justify-around items-center px-4 pb-safe-bottom h-20 bg-surface-container-lowest dark:bg-surface-container-low shadow-[0px_-4px_20px_rgba(168,213,186,0.08)] rounded-t-lg md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">self_improvement</span>
+<span class="font-label-md text-label-md">织记</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim bg-primary-container/20 rounded-xl px-3 py-1 scale-98 active:transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-md text-label-md">心宝</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span class="font-label-md text-label-md">心网</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">lightbulb</span>
+<span class="font-label-md text-label-md">织光</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">我的</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for input focus
+        const input = document.querySelector('input');
+        const footer = document.querySelector('footer');
+        
+        input.addEventListener('focus', () => {
+            footer.classList.add('shadow-xl');
+        });
+        
+        input.addEventListener('blur', () => {
+            footer.classList.remove('shadow-xl');
+        });
+
+        // Simple scroll to bottom on load
+        window.onload = () => {
+            const chatContainer = document.querySelector('main');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        };
+    </script>
+</body></html>

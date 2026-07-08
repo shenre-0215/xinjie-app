@@ -1,0 +1,9 @@
+node_modules/
+unpackage/
+.hbuilderx/
+.DS_Store
+# API keys and local secrets
+**/local.config.json
+# uniCloud cloud function configs with secrets (keep *.example.json, ignore live)
+uniCloud-aliyun/cloudfunctions/chat-api/config.json
+uniCloud-aliyun/cloudfunctions/uni-id/config.json

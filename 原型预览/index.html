@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>心解 · 原型预览</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'PingFang SC', -apple-system, sans-serif;
+      background: #f9faf6;
+      color: #1a1c1a;
+      min-height: 100vh;
+      padding: 40px 24px;
+    }
+    h1 {
+      font-size: 28px;
+      color: #3d6751;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      font-size: 14px;
+      color: #717973;
+      margin-bottom: 32px;
+    }
+    .grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 480px;
+    }
+    a.card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+      background: #ffffff;
+      border-radius: 16px;
+      text-decoration: none;
+      color: #1a1c1a;
+      box-shadow: 0 2px 12px rgba(168,213,186,0.1);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    a.card:hover, a.card:active {
+      transform: scale(0.98);
+      box-shadow: 0 4px 20px rgba(168,213,186,0.2);
+    }
+    .card-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(168,213,186,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: #3d6751;
+      flex-shrink: 0;
+    }
+    .card-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .card-tab {
+      font-size: 12px;
+      color: #717973;
+      margin-top: 2px;
+    }
+    .card-arrow {
+      color: #a8d5ba;
+      font-size: 18px;
+    }
+    .section-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #717973;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 16px 0 8px;
+      border-bottom: 1px solid #edeeeb;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌿 心解 · 原型预览</h1>
+  <p class="subtitle">12 个页面的设计稿，点击即可查看</p>
+
+  <div class="grid">
+    <div class="section-title">织记</div>
+    
+    <a class="card" href="zhiji-thinking-chain.html">
+      <div class="card-num">📝</div>
+      <div class="card-info"><div class="card-title">织记 - 思考链编辑</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="zhiji-diary-edit.html">
+      <div class="card-num">📝</div>
+      <div class="card-info"><div class="card-title">织记 - 日记编辑</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="zhiji-suspend-list.html">
+      <div class="card-num">📝</div>
+      <div class="card-info"><div class="card-title">织记 - 悬置清单</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+    
+    <a class="card" href="zhiji.html">
+      <div class="card-num">📝</div>
+      <div class="card-info"><div class="card-title">织记 - 首页</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <div class="section-title">心宝</div>
+    
+    <a class="card" href="xinbao-history.html">
+      <div class="card-num">💬</div>
+      <div class="card-info"><div class="card-title">心宝 - 历史对话</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="xinbao-chat.html">
+      <div class="card-num">💬</div>
+      <div class="card-info"><div class="card-title">心宝 - 对话页</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <div class="section-title">心网</div>
+    
+    <a class="card" href="xinwang-network.html">
+      <div class="card-num">🕸</div>
+      <div class="card-info"><div class="card-title">心网 - 可视化全景</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="xinwang-worldview.html">
+      <div class="card-num">🕸</div>
+      <div class="card-info"><div class="card-title">心网 - 三观体系</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <div class="section-title">织光</div>
+    
+    <a class="card" href="zhiguang-detail.html">
+      <div class="card-num">✨</div>
+      <div class="card-info"><div class="card-title">织光 - 分享详情</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+    
+    <a class="card" href="zhiguang.html">
+      <div class="card-num">✨</div>
+      <div class="card-info"><div class="card-title">织光 - 广场</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <div class="section-title">我的</div>
+    
+    <a class="card" href="mine-growth.html">
+      <div class="card-num">👤</div>
+      <div class="card-info"><div class="card-title">我的 - 成长档案</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+    
+    <a class="card" href="mine.html">
+      <div class="card-num">👤</div>
+      <div class="card-info"><div class="card-title">我的 - 个人中心</div></div>
+      <div class="card-arrow">→</div>
+    </a>
+  </div>
+</body>
+</html>

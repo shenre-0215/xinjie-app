@@ -1,0 +1,27 @@
+{
+  "name": "h5-preview",
+  "version": "1.0.0",
+  "description": "心解 - 治愈系心理健康陪伴应用",
+  "main": "main.js",
+  "scripts": {
+    "dev": "vite --port 5173 --host",
+    "build": "vite build && node deploy-prepare.mjs",
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@vitejs/plugin-vue": "^5.2.4",
+    "sass": "^1.101.0",
+    "vite": "^5.4.21",
+    "vite-plugin-static-copy": "^4.1.1",
+    "vue": "^3.5.38"
+  },
+  "devDependencies": {
+    "@octokit/rest": "^22.0.1",
+    "gh-pages": "^6.3.0"
+  }
+}

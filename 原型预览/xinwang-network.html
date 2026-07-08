@@ -1,0 +1,326 @@
+<!-- 心网 - 可视化全景 (中文版) -->
+<!DOCTYPE html><html lang="zh-CN" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>心网 - Xin Wang</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Nunito+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#efe2bb",
+                    "primary-fixed": "#bfedd1",
+                    "on-surface-variant": "#414943",
+                    "secondary-fixed-dim": "#d3c6a0",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f3f4f0",
+                    "secondary-container": "#eddfb8",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#dcbfcb",
+                    "outline": "#717973",
+                    "surface-tint": "#3d6751",
+                    "primary-fixed-dim": "#a4d1b6",
+                    "on-secondary-fixed-variant": "#4f4629",
+                    "on-secondary-fixed": "#211b04",
+                    "surface-variant": "#e2e3df",
+                    "on-primary-container": "#345d48",
+                    "tertiary-fixed": "#f9dbe7",
+                    "surface-container-high": "#e8e8e5",
+                    "on-primary-fixed-variant": "#254f3a",
+                    "on-tertiary-fixed": "#27161f",
+                    "on-primary-fixed": "#002113",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed-variant": "#56414b",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#6f5862",
+                    "surface-container-highest": "#e2e3df",
+                    "inverse-surface": "#2f312f",
+                    "background": "#f9faf6",
+                    "surface-bright": "#f9faf6",
+                    "on-tertiary-container": "#654f59",
+                    "on-background": "#1a1c1a",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#e0c3cf",
+                    "inverse-primary": "#a4d1b6",
+                    "on-secondary-container": "#6c6243",
+                    "surface": "#f9faf6",
+                    "inverse-on-surface": "#f0f1ed",
+                    "on-surface": "#1a1c1a",
+                    "surface-dim": "#d9dad7",
+                    "primary": "#3d6751",
+                    "secondary": "#675e3f",
+                    "primary-container": "#a8d5ba",
+                    "outline-variant": "#c1c8c1",
+                    "surface-container": "#edeeeb"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "safe-bottom": "34px",
+                    "safe-top": "88px",
+                    "inline-gap": "12px",
+                    "page-margin": "32px",
+                    "stack-gap": "16px",
+                    "module-gap": "28px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Nunito Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Nunito Sans"],
+                    "label-md": ["Nunito Sans"],
+                    "headline-sm": ["Plus Jakarta Sans"],
+                    "label-sm": ["Nunito Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["22px", {"lineHeight": "30px", "fontWeight": "600"}],
+                    "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["17px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-sm": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9faf6; /* Milk Apricot White fallback */
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+        }
+
+        .healing-shadow {
+            box-shadow: 0px 4px 20px rgba(168, 213, 186, 0.08);
+        }
+
+        .node-pulse {
+            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .line-flow {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: flow 3s ease-out forwards;
+        }
+
+        @keyframes flow {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .glass-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- Back to index -->
+<div style="position:fixed;top:10px;left:10px;z-index:9999;background:rgba(255,255,255,0.9);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+  <a href="index.html" style="text-decoration:none;font-size:20px;color:#3d6751;" title="返回列表">☰</a>
+</div>
+
+<!-- Top Navigation Anchor (TopAppBar) -->
+<header class="fixed top-0 w-full z-50 bg-background pt-safe-top h-20 flex items-center px-page-margin transition-opacity duration-200 justify-start gap-4">
+<div class="flex items-center gap-2">
+
+</div>
+
+<h1 class="font-headline-md text-headline-md text-primary">心网</h1> <!-- Spacer for center alignment -->
+</header>
+<main class="pt-24 pb-32 px-page-margin min-h-screen">
+<!-- Category Filter Tabs -->
+<section class="flex justify-between items-center bg-surface-container/40 p-1.5 rounded-full mb-module-gap mt-4">
+<button class="flex-1 py-2 px-4 rounded-full font-label-md text-label-md text-primary bg-primary-container/20 transition-all">全览</button>
+<button class="flex-1 py-2 px-4 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all">确信</button>
+<button class="flex-1 py-2 px-4 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all">洞察</button>
+<button class="flex-1 py-2 px-4 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all">韧性</button>
+</section>
+<!-- Cognitive Network Canvas -->
+<section class="relative w-full aspect-square md:aspect-video flex items-center justify-center">
+<!-- Background Decorative Blur -->
+<div class="absolute inset-0 flex items-center justify-center -z-10 opacity-30">
+<div class="w-64 h-64 bg-primary-container/40 rounded-full blur-[80px] floating"></div>
+</div>
+<!-- SVG Web of Nodes -->
+<svg class="w-full h-full max-w-[500px]" fill="none" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+<!-- Connections (Lines) -->
+<path class="text-primary/20 line-flow" d="M200 200 L120 120" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+<path class="text-primary/20 line-flow" d="M200 200 L280 120" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+<path class="text-primary/20 line-flow" d="M200 200 L100 280" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+<path class="text-primary/20 line-flow" d="M200 200 L300 280" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+<path class="text-primary/20 line-flow" d="M120 120 L60 80" stroke="currentColor" stroke-dasharray="4 4" stroke-width="2"></path>
+<path class="text-primary/20 line-flow" d="M280 120 L340 100" stroke="currentColor" stroke-width="2"></path>
+<!-- Hub Node: Center -->
+<g class="node-pulse cursor-pointer">
+<circle cx="200" cy="200" fill="#a8d5ba" fill-opacity="0.2" r="28"></circle>
+<circle cx="200" cy="200" fill="#3d6751" r="18"></circle>
+<text class="font-label-sm text-[10px]" fill="white" text-anchor="middle" x="200" y="205">核心</text>
+</g>
+<!-- Completed Node -->
+<g class="cursor-pointer" transform="translate(120, 120)">
+<circle cx="0" cy="0" fill="#a8d5ba" r="14"></circle>
+<text class="font-label-sm text-[8px]" fill="#3d6751" text-anchor="middle" x="0" y="5">自爱</text>
+</g>
+<!-- Completed Node -->
+<g class="cursor-pointer" transform="translate(280, 120)">
+<circle cx="0" cy="0" fill="#a8d5ba" r="14"></circle>
+<text class="font-label-sm text-[8px]" fill="#3d6751" text-anchor="middle" x="0" y="5">宽恕</text>
+</g>
+<!-- In-Progress Node (Dashed) -->
+<g class="cursor-pointer" transform="translate(100, 280)">
+<circle cx="0" cy="0" r="14" stroke="#3d6751" stroke-dasharray="4 2" stroke-width="1.5"></circle>
+<text class="font-label-sm text-[8px]" fill="#3d6751" text-anchor="middle" x="0" y="5">勇气</text>
+</g>
+<!-- Suspended Node (Lavender) -->
+<g class="cursor-pointer opacity-40" transform="translate(300, 280)">
+<circle cx="0" cy="0" fill="#dcbfcb" r="14"></circle>
+<text class="font-label-sm text-[8px]" fill="#6f5862" text-anchor="middle" x="0" y="5">宁静</text>
+</g>
+<!-- Small Floating Detail -->
+<circle cx="60" cy="80" fill="white" r="6" stroke="#a8d5ba" stroke-width="1"></circle>
+<circle cx="340" cy="100" fill="#a8d5ba" r="6"></circle>
+</svg>
+<!-- Tooltip / Label Floating -->
+<div class="absolute top-1/4 left-1/4 -translate-x-1/2 bg-white/80 glass-blur px-3 py-1.5 rounded-full healing-shadow border border-white/50">
+<span class="text-label-sm text-primary">已建立 12 个连接</span>
+</div>
+</section>
+<!-- Stats Display Section -->
+<section class="mt-module-gap space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">内在生长状态</h2>
+<span class="text-label-md text-on-surface-variant/60 font-light">更新于今日 清晨</span>
+</div>
+<!-- Bento Layout Stats -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white p-5 rounded-lg healing-shadow border border-surface-container-low">
+<p class="text-label-sm text-on-surface-variant/50 uppercase tracking-widest mb-1">心网密度</p>
+<p class="font-headline-md text-headline-md text-primary">繁茂</p>
+<div class="w-full h-1 bg-surface-container rounded-full mt-3">
+<div class="w-3/4 h-full bg-primary-container rounded-full"></div>
+</div>
+</div>
+<div class="bg-white p-5 rounded-lg healing-shadow border border-surface-container-low">
+<p class="text-label-sm text-on-surface-variant/50 uppercase tracking-widest mb-1">情绪韧性</p>
+<p class="font-headline-md text-headline-md text-tertiary">正在苏醒</p>
+<div class="flex gap-1 mt-3">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="w-2 h-2 rounded-full bg-tertiary/40"></span>
+<span class="w-2 h-2 rounded-full bg-tertiary/20"></span>
+</div>
+</div>
+</div>
+<!-- Large Inspirational Card -->
+<div class="bg-secondary-container/30 p-6 rounded-lg relative overflow-hidden group">
+<div class="relative z-10">
+<h3 class="font-headline-sm text-headline-sm text-secondary mb-2">新的枝桠正在伸展</h3>
+<p class="text-body-md text-on-secondary-container/80 max-w-[240px]">你的“确信”节点正在尝试与外部世界建立联系。保持深呼吸，让这个过程自然发生。</p>
+</div>
+<!-- Mascot Guide Element -->
+<div class="absolute -bottom-2 -right-4 w-32 h-32 opacity-20 group-hover:opacity-40 transition-opacity">
+<img class="w-full h-full object-contain" data-alt="A soft, round, green organic character floating peacefully among pastel-colored plant leaves. The character is minimalist with tiny dots for eyes, conveying a sense of serenity and quiet companionship. The background is a warm milk apricot white with soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD74TEQVl5w4bmyZ-ccTUbEhLoIXi2TavSnXwo_6sy_pBAkW3gTiHlWuS7QId69kBDsS_YKCrG9JEkjtUtlimkN5fIxSle4dZhaSea1yNE_3T2kN4le6uXLXMYYKpR-MPqmqv2MjxeFgJHgaZetPOznYjOC5Y-O8Uww3INIFPf6hJ2Jqwwu0_rivUa-3wK0KSZEs_Agq5BtcvE8weZYjh2tjmoK-napNk-q7-RGVYcpWLJ-q2XTsN_55pAXACjNrs2ihza0bdetn1Yv">
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Shell (BottomNavBar) -->
+<nav class="fixed bottom-0 w-full z-50 bg-surface-container-lowest flex justify-around items-center px-4 pb-safe-bottom h-20 rounded-t-lg shadow-[0px_-4px_20px_rgba(168,213,186,0.08)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1">self_improvement</span>
+<span class="text-label-md font-label-md">织记</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1">auto_awesome</span>
+<span class="text-label-md font-label-md">心宝</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/20 rounded-xl px-3 py-1 active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1">hub</span>
+<span class="text-label-md font-label-md">心网</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1">lightbulb</span>
+<span class="text-label-md font-label-md">织光</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="text-label-md font-label-md">我的</span>
+</a>
+</nav>
+<!-- Interactive Layer: Floating Sparkles Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvasSection = document.querySelector('section.relative');
+            
+            canvasSection.addEventListener('click', (e) => {
+                const rect = canvasSection.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                createSparkle(x, y, canvasSection);
+            });
+
+            function createSparkle(x, y, parent) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'absolute pointer-events-none w-4 h-4 rounded-full bg-primary-container/60 blur-[4px]';
+                sparkle.style.left = `${x}px`;
+                sparkle.style.top = `${y}px`;
+                parent.appendChild(sparkle);
+
+                const animation = sparkle.animate([
+                    { transform: 'scale(0) translateY(0)', opacity: 1 },
+                    { transform: 'scale(2.5) translateY(-40px)', opacity: 0 }
+                ], {
+                    duration: 1200,
+                    easing: 'ease-out'
+                });
+
+                animation.onfinish = () => sparkle.remove();
+            }
+        });
+    </script>
+
+
+
+
+
+
+</body></html>

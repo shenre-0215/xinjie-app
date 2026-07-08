@@ -1,0 +1,8 @@
+{
+  "deepseekApiKey": "<YOUR_DEEPSEEK_API_KEY>",
+  "deepseekBaseUrl": "https://api.deepseek.com/chat/completions",
+  "model": "deepseek-chat",
+  "maxTokens": 800,
+  "temperature": 0.8,
+  "timeout": 20000
+}

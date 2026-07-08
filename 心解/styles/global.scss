@@ -1,0 +1,180 @@
+/* ===== 心解 Global Utility Classes ===== */
+@import './variables.scss';
+
+/* === Layout === */
+.page {
+  min-height: 100vh;
+  background-color: $color-background;
+}
+
+.page-with-nav {
+  min-height: 100vh;
+  background-color: $color-background;
+  padding-bottom: 200rpx;
+}
+
+.page-padding {
+  padding-left: $sp-page-margin;
+  padding-right: $sp-page-margin;
+}
+
+/* === Flex Helpers === */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-col-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* === Card Styles === */
+.card {
+  background-color: $color-surface-container-lowest;
+  border-radius: $radius-default;
+  box-shadow: $shadow-healing;
+}
+
+.card-padded {
+  background-color: $color-surface-container-lowest;
+  border-radius: $radius-default;
+  box-shadow: $shadow-healing;
+  padding: 40rpx;
+}
+
+/* === Text Styles === */
+.text-primary { color: $color-primary; }
+.text-secondary { color: $color-secondary; }
+.text-tertiary { color: $color-tertiary; }
+.text-on-surface { color: $color-on-surface; }
+.text-on-surface-variant { color: $color-on-surface-variant; }
+.text-error { color: $color-error; }
+
+/* === Background Colors === */
+.bg-background { background-color: $color-background; }
+.bg-surface { background-color: $color-surface; }
+.bg-surface-lowest { background-color: $color-surface-container-lowest; }
+.bg-surface-low { background-color: $color-surface-container-low; }
+.bg-surface-high { background-color: $color-surface-container-high; }
+.bg-primary { background-color: $color-primary; }
+.bg-primary-container { background-color: $color-primary-container; }
+.bg-primary-fixed { background-color: $color-primary-fixed; }
+.bg-secondary-container { background-color: $color-secondary-container; }
+.bg-secondary-fixed { background-color: $color-secondary-fixed; }
+.bg-tertiary-container { background-color: $color-tertiary-container; }
+.bg-tertiary-fixed { background-color: $color-tertiary-fixed; }
+
+/* === Typography Scale === */
+.display-lg {
+  font-family: $font-headline;
+  font-size: $fs-display-lg;
+  line-height: $lh-display-lg;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.headline-md {
+  font-family: $font-headline;
+  font-size: $fs-headline-md;
+  line-height: $lh-headline-md;
+  font-weight: 600;
+}
+
+.headline-sm {
+  font-family: $font-headline;
+  font-size: $fs-headline-sm;
+  line-height: $lh-headline-sm;
+  font-weight: 600;
+}
+
+.body-lg {
+  font-family: $font-body;
+  font-size: $fs-body-lg;
+  line-height: $lh-body-lg;
+  font-weight: 400;
+}
+
+.body-md {
+  font-family: $font-body;
+  font-size: $fs-body-md;
+  line-height: $lh-body-md;
+  font-weight: 400;
+}
+
+.label-md {
+  font-family: $font-body;
+  font-size: $fs-label-md;
+  line-height: $lh-label-md;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.label-sm {
+  font-family: $font-body;
+  font-size: $fs-label-sm;
+  line-height: $lh-label-sm;
+  font-weight: 400;
+}
+
+/* === Border Radius === */
+.rounded-default { border-radius: $radius-default; }
+.rounded-lg { border-radius: $radius-lg; }
+.rounded-xl { border-radius: $radius-xl; }
+.rounded-full { border-radius: $radius-full; }
+
+/* === Interaction === */
+.pressable {
+  transition: transform $transition-press, opacity $transition-press;
+  &:active {
+    transform: scale(0.95);
+    opacity: 0.9;
+  }
+}
+
+.pressable-subtle {
+  transition: transform $transition-press;
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+/* === Spacing === */
+.mt-module { margin-top: $sp-module-gap; }
+.mb-module { margin-bottom: $sp-module-gap; }
+.gap-stack { gap: $sp-stack-gap; }
+.gap-inline { gap: $sp-inline-gap; }
+
+/* === Hide Scrollbar === */
+.hide-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* === Masks & Overlays === */
+.overlay-mask {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 100;
+}
+
+/* === Safe Area === */
+.pb-safe {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.pt-safe {
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+}

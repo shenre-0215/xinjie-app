@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#3d6751">
+  <meta name="description" content="心解 - 治愈系心理健康应用预览">
+  <title>心解 · 预览</title>
+  <link rel="manifest" href="/xinjie-app/manifest.json">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #e8f0e9 0%, #f0f4f1 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-family: 'PingFang SC', -apple-system, sans-serif;
+    }
+
+    #phone {
+      width: 375px;
+      height: 812px;
+      background: #f9faf6;
+      border-radius: 40px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25), 0 0 0 3px rgba(255,255,255,0.3), inset 0 0 0 2px rgba(0,0,0,0.05);
+      position: relative;
+    }
+
+    .phone-notch {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      height: 24px;
+      background: #1a1c1a;
+      border-radius: 0 0 20px 20px;
+      z-index: 1000;
+    }
+
+    #app {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .install-hint {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(61, 103, 81, 0.95);
+      color: white;
+      padding: 16px 24px;
+      border-radius: 30px;
+      font-size: 14px;
+      box-shadow: 0 10px 30px rgba(61, 103, 81, 0.3);
+      z-index: 100;
+      animation: slideUp 0.3s ease-out;
+    }
+
+    @media (max-width: 420px) {
+      #phone {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .phone-notch {
+        display: none;
+      }
+      html, body { 
+        background: #f9faf6; 
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+      .install-hint {
+        display: block;
+      }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div id="phone">
+    <div class="phone-notch"></div>
+    <div id="app"></div>
+  </div>
+  
+  <div class="install-hint">
+    💡 在手机浏览器中点击菜单 → 添加到主屏幕，体验原生APP效果
+  </div>
+
+  <script type="module" src="/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+/* ===== 心解 SCSS Mixins ===== */
+
+@import './variables.scss';
+
+// Healing card shadow
+@mixin healing-shadow {
+  box-shadow: $shadow-healing;
+}
+
+// Active press effect (scale down)
+@mixin active-press {
+  transition: transform $transition-press;
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// Active press - subtle
+@mixin active-press-subtle {
+  transition: transform $transition-press;
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Flex center
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Flex between
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// Rounded pill tag
+@mixin tag-pill($bg, $color) {
+  display: inline-flex;
+  align-items: center;
+  padding: 4rpx 16rpx;
+  border-radius: $radius-full;
+  background-color: $bg;
+  color: $color;
+  font-size: $fs-label-sm;
+  font-weight: 400;
+  line-height: $lh-label-sm;
+}
+
+// Page container
+@mixin page-container {
+  min-height: 100vh;
+  background-color: $color-background;
+  padding-bottom: 160rpx;
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+}
+
+// Section card
+@mixin card {
+  background-color: $color-surface-container-lowest;
+  border-radius: $radius-default;
+  @include healing-shadow;
+}
+
+// Text truncate
+@mixin text-truncate($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// Hide scrollbar
+@mixin hide-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// Bounce animation for TabBar active state
+@mixin bounce-active {
+  animation: bounce-in $transition-bounce-small;
+}
+
+@keyframes bounce-in {
+  0% { transform: scale(0.8); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+// Fade in animation for pages
+@mixin fade-in {
+  animation: fade-in $transition-fade;
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; transform: translateY(20rpx); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+// Float animation for decorative elements
+@mixin float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12rpx); }
+}
+
+// Pulse animation for subtle feedback
+@mixin pulse-animation {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+// Heart beat animation
+@mixin heart-beat {
+  animation: heart-beat 1s ease-in-out;
+}
+
+@keyframes heart-beat {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.3); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}

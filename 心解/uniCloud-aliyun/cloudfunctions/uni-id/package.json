@@ -1,0 +1,7 @@
+{
+  "name": "uni-id",
+  "version": "1.0.0",
+  "description": "心解用户认证云函数 — 自包含 JWT（不依赖 uni-id-common）",
+  "main": "index.js",
+  "dependencies": {}
+}

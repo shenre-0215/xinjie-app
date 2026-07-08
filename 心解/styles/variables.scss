@@ -1,0 +1,127 @@
+/* ===== 心解 Design System Variables ===== */
+/* Ported 1:1 from xinjie.html Tailwind config */
+
+// === Colors ===
+// Primary (Grass Milk Green)
+$color-primary: #3d6751;
+$color-primary-fixed: #bfedd1;
+$color-primary-fixed-dim: #a4d1b6;
+$color-primary-container: #a8d5ba;
+$color-on-primary: #ffffff;
+$color-on-primary-container: #345d48;
+$color-on-primary-fixed: #002113;
+$color-on-primary-fixed-variant: #254f3a;
+
+// Secondary (Warm Amber)
+$color-secondary: #675e3f;
+$color-secondary-fixed: #efe2bb;
+$color-secondary-fixed-dim: #d3c6a0;
+$color-secondary-container: #eddfb8;
+$color-on-secondary: #ffffff;
+$color-on-secondary-container: #6c6243;
+$color-on-secondary-fixed: #211b04;
+$color-on-secondary-fixed-variant: #4f4629;
+
+// Tertiary (Muted Mauve)
+$color-tertiary: #6f5862;
+$color-tertiary-fixed: #f9dbe7;
+$color-tertiary-fixed-dim: #dcbfcb;
+$color-tertiary-container: #e0c3cf;
+$color-on-tertiary: #ffffff;
+$color-on-tertiary-container: #654f59;
+$color-on-tertiary-fixed: #27161f;
+$color-on-tertiary-fixed-variant: #56414b;
+
+// Error
+$color-error: #ba1a1a;
+$color-error-container: #ffdad6;
+$color-on-error: #ffffff;
+$color-on-error-container: #93000a;
+
+// Warning
+$color-warning: #92400e;
+$color-warning-container: #ffdc80;
+$color-on-warning: #ffffff;
+$color-on-warning-container: #5c1a00;
+
+// Surface / Background
+$color-background: #f9faf6;         // Milk Apricot White
+$color-surface: #f9faf6;
+$color-surface-bright: #f9faf6;
+$color-surface-dim: #d9dad7;
+$color-surface-tint: #3d6751;
+$color-surface-variant: #e2e3df;
+
+$color-surface-container: #edeeeb;
+$color-surface-container-low: #f3f4f0;
+$color-surface-container-lowest: #ffffff;
+$color-surface-container-high: #e8e8e5;
+$color-surface-container-highest: #e2e3df;
+
+// On Surface
+$color-on-surface: #1a1c1a;
+$color-on-surface-variant: #414943;
+$color-on-background: #1a1c1a;
+
+// Outline
+$color-outline: #717973;
+$color-outline-variant: #c1c8c1;
+
+// Inverse
+$color-inverse-surface: #2f312f;
+$color-inverse-on-surface: #f0f1ed;
+$color-inverse-primary: #a4d1b6;
+
+// === Spacing === (converted to rpx: 1px ≈ 2rpx)
+$sp-safe-bottom: 68rpx;
+$sp-safe-top-base: 88rpx;
+$sp-inline-gap: 24rpx;
+$sp-page-margin: 64rpx;
+$sp-stack-gap: 32rpx;
+$sp-section-gap: 32rpx;
+$sp-module-gap: 56rpx;
+
+// === Border Radius ===
+$radius-default: 16rpx;
+$radius-md: 16rpx;
+$radius-lg: 32rpx;
+$radius-xl: 48rpx;
+$radius-full: 9999rpx;
+
+// === Typography ===
+// Font families (system fonts for Mini Program)
+$font-headline: 'PingFang SC', 'Helvetica Neue', sans-serif;
+$font-body: 'PingFang SC', -apple-system, sans-serif;
+
+// Font sizes
+$fs-display-lg: 56rpx;
+$fs-headline-md: 44rpx;
+$fs-headline-sm: 36rpx;
+$fs-title-md: 36rpx;
+$fs-body-lg: 34rpx;
+$fs-body-md: 30rpx;
+$fs-body-sm: 28rpx;
+$fs-label-md: 26rpx;
+$fs-label-sm: 22rpx;
+$fs-label-xs: 22rpx;
+
+// Line heights
+$lh-display-lg: 72rpx;
+$lh-headline-md: 60rpx;
+$lh-headline-sm: 52rpx;
+$lh-body-lg: 56rpx;
+$lh-body-md: 48rpx;
+$lh-label-md: 36rpx;
+$lh-label-sm: 32rpx;
+
+// === Shadows ===
+$shadow-healing: 0px 8rpx 40rpx rgba(168, 213, 186, 0.08);
+$shadow-nav: 0px -8rpx 40rpx rgba(168, 213, 186, 0.08);
+$shadow-btn: 0px 8rpx 24rpx rgba(61, 103, 81, 0.2);
+
+// === Transitions ===
+$transition-press: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-screen: 0.3s ease-out;
+$transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+$transition-bounce-small: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+$transition-fade: 0.35s ease-out;

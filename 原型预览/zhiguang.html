@@ -1,0 +1,312 @@
+<!-- 织光 - 广场 (中文版) -->
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>织光 - 心解</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Nunito+Sans:wght@400;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@100..900&amp;family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#efe2bb",
+                    "primary-fixed": "#bfedd1",
+                    "on-surface-variant": "#414943",
+                    "secondary-fixed-dim": "#d3c6a0",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f3f4f0",
+                    "secondary-container": "#eddfb8",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#dcbfcb",
+                    "outline": "#717973",
+                    "surface-tint": "#3d6751",
+                    "primary-fixed-dim": "#a4d1b6",
+                    "on-secondary-fixed-variant": "#4f4629",
+                    "on-secondary-fixed": "#211b04",
+                    "surface-variant": "#e2e3df",
+                    "on-primary-container": "#345d48",
+                    "tertiary-fixed": "#f9dbe7",
+                    "surface-container-high": "#e8e8e5",
+                    "on-primary-fixed-variant": "#254f3a",
+                    "on-tertiary-fixed": "#27161f",
+                    "on-primary-fixed": "#002113",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed-variant": "#56414b",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#6f5862",
+                    "surface-container-highest": "#e2e3df",
+                    "inverse-surface": "#2f312f",
+                    "background": "#f9faf6",
+                    "surface-bright": "#f9faf6",
+                    "on-tertiary-container": "#654f59",
+                    "on-background": "#1a1c1a",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#e0c3cf",
+                    "inverse-primary": "#a4d1b6",
+                    "on-secondary-container": "#6c6243",
+                    "surface": "#f9faf6",
+                    "inverse-on-surface": "#f0f1ed",
+                    "on-surface": "#1a1c1a",
+                    "surface-dim": "#d9dad7",
+                    "primary": "#3d6751",
+                    "secondary": "#675e3f",
+                    "primary-container": "#a8d5ba",
+                    "outline-variant": "#c1c8c1",
+                    "surface-container": "#edeeeb"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "safe-bottom": "34px",
+                    "safe-top": "88px",
+                    "inline-gap": "12px",
+                    "page-margin": "32px",
+                    "stack-gap": "16px",
+                    "module-gap": "28px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-md": ["Nunito Sans"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Nunito Sans"],
+                    "label-md": ["Nunito Sans"],
+                    "headline-sm": ["Plus Jakarta Sans"],
+                    "label-sm": ["Nunito Sans"]
+            },
+            "fontSize": {
+                    "headline-md": ["22px", {"lineHeight": "30px", "fontWeight": "600"}],
+                    "body-md": ["15px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["17px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-sm": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f9faf6; /* Milk Apricot White */
+            -webkit-tap-highlight-color: transparent;
+        }
+        .healing-shadow {
+            box-shadow: 0px 4px 20px rgba(168, 213, 186, 0.08);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .resonance-active {
+            color: #ba1a1a;
+            transform: scale(1.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- Back to index -->
+<div style="position:fixed;top:10px;left:10px;z-index:9999;background:rgba(255,255,255,0.9);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+  <a href="index.html" style="text-decoration:none;font-size:20px;color:#3d6751;" title="返回列表">☰</a>
+</div>
+
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-background pt-safe-top h-20 flex items-center justify-between px-page-margin">
+<h1 class="font-display-lg text-display-lg text-primary">织光</h1>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-2xl active:opacity-80 transition-opacity">menu</span>
+</div>
+</header>
+<main class="pt-24 pb-32">
+<!-- Floating Animated Background Element -->
+<div class="fixed top-20 right-0 -z-10 opacity-20 pointer-events-none">
+</div>
+<!-- Horizontal Scroll Tags -->
+<section class="mb-module-gap px-page-margin">
+<div class="flex overflow-x-auto hide-scrollbar gap-inline-gap py-2">
+<div class="flex flex-col items-center flex-shrink-0 group">
+<span class="font-label-md text-label-md text-primary font-bold px-2 py-1">全部</span>
+<div class="h-1 w-4 bg-primary rounded-full mt-1"></div>
+</div>
+<div class="flex flex-col items-center flex-shrink-0 group">
+<span class="font-label-md text-label-md text-on-surface-variant px-2 py-1">情绪疗愈</span>
+<div class="h-1 w-4 bg-transparent group-active:bg-primary/30 rounded-full mt-1"></div>
+</div>
+<div class="flex flex-col items-center flex-shrink-0 group">
+<span class="font-label-md text-label-md text-on-surface-variant px-2 py-1">晨间随笔</span>
+<div class="h-1 w-4 bg-transparent group-active:bg-primary/30 rounded-full mt-1"></div>
+</div>
+<div class="flex flex-col items-center flex-shrink-0 group">
+<span class="font-label-md text-label-md text-on-surface-variant px-2 py-1">自然回响</span>
+<div class="h-1 w-4 bg-transparent group-active:bg-primary/30 rounded-full mt-1"></div>
+</div>
+<div class="flex flex-col items-center flex-shrink-0 group">
+<span class="font-label-md text-label-md text-on-surface-variant px-2 py-1">梦境织锦</span>
+<div class="h-1 w-4 bg-transparent group-active:bg-primary/30 rounded-full mt-1"></div>
+</div>
+</div>
+</section>
+<!-- Content Feed -->
+<section class="flex flex-col gap-module-gap px-page-margin">
+<!-- Card 1 -->
+<article class="bg-surface-container-lowest rounded-lg p-6 healing-shadow transition-transform active:scale-[0.98] duration-200">
+<div class="flex justify-between items-start mb-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary">织者 892</span>
+<span class="text-[11px] text-on-surface-variant/60 font-label-sm">2小时前</span>
+</div>
+<div class="bg-primary-fixed/30 px-3 py-1 rounded-full">
+<span class="font-label-sm text-label-sm text-on-primary-fixed-variant"># 宁静</span>
+</div>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed mb-6">
+                    在这个午后，我听见风穿过树梢的声音，像是在对我低语。生活并不总是需要答案，有时候，仅仅是存在着，就足够美好了。
+                </p>
+<div class="flex justify-between items-center">
+<div class="flex gap-2">
+<span class="inline-block px-3 py-1 bg-secondary-fixed/30 rounded-full text-[11px] text-on-secondary-fixed-variant">温暖</span>
+</div>
+<button class="flex items-center gap-1 text-on-surface-variant/40 transition-all duration-300" onclick="toggleResonance(this)">
+<span class="material-symbols-outlined text-2xl">favorite</span>
+<span class="font-label-md text-label-md">共鸣</span>
+</button>
+</div>
+</article>
+<!-- Card 2 with Image -->
+<article class="bg-surface-container-lowest rounded-lg overflow-hidden healing-shadow transition-transform active:scale-[0.98] duration-200">
+<div class="h-48 w-full" data-alt="A soft, ethereal macro photograph of dew drops on a blade of grass at sunrise. The lighting is golden and warm, with a dreamy bokeh effect in the background. The overall aesthetic is minimalist and healing, featuring soft greens and warm yellows consistent with a gentle, supportive sanctuary brand identity." style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDIpHf5N-StH0RFBxj2R36NODd0C6zLR3HiM9iP_hGdruYnDkWmvlfopxLpkDnY5jx27fTaVyb2iQzMhLbxsNgGK25VJ6eNifO7v0yLEHm1h77OIAQH78JTX1XdZ74SD0aPheZQ8wFQayt46o1P585ENfZHTibifILAc0DICjGdduyHHEoAaDjlC9R7SJdpI8bgouC5cBQmvKZ990qKvoe4pxfW8GQqalTAZDjj1Of0xIBUOEmJizlMS40PTuWuBzmwLLdQ4RmWGpyo&quot;);"></div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary">织者 314</span>
+<span class="text-[11px] text-on-surface-variant/60 font-label-sm">5小时前</span>
+</div>
+<div class="bg-tertiary-fixed/30 px-3 py-1 rounded-full">
+<span class="font-label-sm text-label-sm text-on-tertiary-fixed-variant"># 觉察</span>
+</div>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed mb-6">
+                        今天我学会了原谅自己。那些过去没做好的事，就让它们像秋叶一样落下吧。大地会接纳它们，化作养分。
+                    </p>
+<div class="flex justify-between items-center">
+<div class="flex gap-2">
+<span class="inline-block px-3 py-1 bg-primary-fixed/20 rounded-full text-[11px] text-on-primary-fixed-variant">释然</span>
+</div>
+<button class="flex items-center gap-1 text-on-surface-variant/40 transition-all duration-300" onclick="toggleResonance(this)">
+<span class="material-symbols-outlined text-2xl">favorite</span>
+<span class="font-label-md text-label-md">共鸣</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="bg-surface-container-lowest rounded-lg p-6 healing-shadow transition-transform active:scale-[0.98] duration-200">
+<div class="flex justify-between items-start mb-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary">织者 556</span>
+<span class="text-[11px] text-on-surface-variant/60 font-label-sm">昨天</span>
+</div>
+<div class="bg-secondary-fixed/30 px-3 py-1 rounded-full">
+<span class="font-label-sm text-label-sm text-on-secondary-fixed-variant"># 陪伴</span>
+</div>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed mb-6">
+                    在这里，我感觉自己是被听见的。谢谢你们的每一份安静的陪伴，这光虽然微弱，却足以照亮我的小小角落。
+                </p>
+<div class="flex justify-between items-center">
+<div class="flex gap-2">
+<span class="inline-block px-3 py-1 bg-tertiary-fixed/20 rounded-full text-[11px] text-on-tertiary-fixed-variant">感恩</span>
+</div>
+<button class="flex items-center gap-1 text-on-surface-variant/40 transition-all duration-300" onclick="toggleResonance(this)">
+<span class="material-symbols-outlined text-2xl">favorite</span>
+<span class="font-label-md text-label-md">共鸣</span>
+</button>
+</div>
+</article>
+</section>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed right-6 bottom-24 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center active:scale-90 transition-transform z-40">
+<span class="material-symbols-outlined text-2xl">edit</span>
+</button>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-safe-bottom h-20 bg-surface-container-lowest rounded-t-lg shadow-[0px_-4px_20px_rgba(168,213,186,0.08)]">
+<div class="flex flex-col items-center justify-center text-on-surface-variant/70 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-2xl">self_improvement</span>
+<span class="font-label-md text-label-md">织记</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant/70 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-2xl">auto_awesome</span>
+<span class="font-label-md text-label-md">心宝</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant/70 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-2xl">hub</span>
+<span class="font-label-md text-label-md">心网</span>
+</div>
+<div class="flex flex-col items-center justify-center text-primary bg-primary-container/20 rounded-xl px-3 py-1 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: &quot;FILL&quot; 1;">lightbulb</span>
+<span class="font-label-md text-label-md font-bold">织光</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant/70 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-2xl">person</span>
+<span class="font-label-md text-label-md">我的</span>
+</div>
+</nav>
+<script>
+        function toggleResonance(btn) {
+            const icon = btn.querySelector('.material-symbols-outlined');
+            const label = btn.querySelector('.font-label-md');
+            
+            if (icon.getAttribute('style') && icon.getAttribute('style').includes('FILL')) {
+                icon.style.fontVariationSettings = "'FILL' 0";
+                btn.classList.remove('text-error');
+                btn.classList.add('text-on-surface-variant/40');
+                label.innerText = '共鸣';
+            } else {
+                icon.style.fontVariationSettings = "'FILL' 1";
+                btn.classList.add('text-error');
+                btn.classList.remove('text-on-surface-variant/40');
+                label.innerText = '已共鸣';
+                
+                // Simple pop animation
+                btn.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    btn.style.transform = 'scale(1)';
+                }, 200);
+            }
+        }
+
+        // Add soft parallax effect to cards on scroll
+        window.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('article');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    const shift = (rect.top - window.innerHeight / 2) * 0.02;
+                    // Subtly shift background if any or just add depth feel
+                }
+            });
+        });
+    </script>
+
+
+</body></html>

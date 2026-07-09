@@ -1,5 +1,8 @@
 <template>
   <view class="page-container">
+    <!-- #ifdef H5 -->
+    <view class="h5-safe-top" />
+    <!-- #endif -->
     <view class="header">
       <view class="header-left">
         <view class="avatar-circle">
@@ -659,6 +662,8 @@ function onTabChange(tab) {
   background: linear-gradient(135deg, rgba($color-primary-container, 0.15) 0%, rgba($color-primary-container, 0.05) 100%);
   border-radius: $radius-xl;
   margin-bottom: $sp-module-gap;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .welcome-icon-wrap {
@@ -674,11 +679,12 @@ function onTabChange(tab) {
 .welcome-desc { display: block; font-size: $fs-body-sm; color: $color-on-surface-variant; margin-bottom: 40rpx; }
 
 .start-btn {
-  display: inline-flex; align-items: center; gap: 16rpx;
+  display: flex; align-items: center; justify-content: center; gap: 16rpx;
   padding: 24rpx 48rpx;
   background: $color-primary;
   border-radius: $radius-full;
   margin: 0 auto;
+  width: fit-content;
 }
 
 .start-btn-text { font-size: $fs-body-md; font-weight: 500; color: #fff; }

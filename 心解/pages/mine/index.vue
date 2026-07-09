@@ -1,5 +1,8 @@
 <template>
   <view class="page-container">
+    <!-- #ifdef H5 -->
+    <view class="h5-safe-top" />
+    <!-- #endif -->
     <!-- Header -->
     <view class="header">
       <view class="header-left">
@@ -11,8 +14,9 @@
       </view>
     </view>
 
-    <!-- Profile -->
-    <view class="profile-section">
+    <scroll-view scroll-y class="scroll-area">
+      <!-- Profile -->
+      <view class="profile-section">
       <view class="profile-decor" />
       <!-- Logged in -->
       <view v-if="authState.isLoggedIn" class="profile-inner" @click="goPage('profile-edit')">
@@ -39,15 +43,15 @@
     <!-- Stats — live from stores -->
     <view class="stats-section">
       <view class="stats-grid">
-        <view class="stat-card card">
+        <view class="stat-card">
           <text class="stat-number">{{ statClosed }}</text>
           <text class="stat-label">已闭合链</text>
         </view>
-        <view class="stat-card card">
+        <view class="stat-card">
           <text class="stat-number">{{ statNodes }}</text>
           <text class="stat-label">心网节点</text>
         </view>
-        <view class="stat-card card">
+        <view class="stat-card">
           <text class="stat-number">{{ statWorldview }}</text>
           <text class="stat-label">三观条目</text>
         </view>
@@ -101,6 +105,7 @@
         </view>
       </view>
     </view>
+    </scroll-view>
 
     <TabBar current="mine" @change="onTabChange" />
   </view>
@@ -215,11 +220,11 @@ function onTabChange(tab) {
 .identity-tag { padding: 8rpx 32rpx; border-radius: $radius-full; background-color: $color-primary-fixed; }
 .identity-text { font-size: $fs-label-md; font-weight: 600; color: $color-on-primary-fixed-variant; }
 
-.stats-section { padding: 0 $sp-page-margin; margin-bottom: $sp-module-gap; }
-.stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: $sp-inline-gap; }
-.stat-card { padding: 32rpx; display: flex; flex-direction: column; align-items: center; }
+.stats-section { padding: 0 16rpx; margin-bottom: $sp-module-gap; }
+.stats-grid { display: flex; justify-content: space-between; width: 100%; gap: 8rpx; }
+.stat-card { width: 33%; padding: 24rpx 4rpx; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .stat-number { font-size: $fs-headline-md; font-weight: 600; color: $color-primary; margin-bottom: 8rpx; }
-.stat-label { font-size: $fs-label-sm; color: rgba($color-on-surface-variant, 0.7); }
+.stat-label { font-size: 20rpx; color: rgba($color-on-surface-variant, 0.7); white-space: nowrap; text-align: center; }
 
 .menu-section { padding: 0 $sp-page-margin; margin-bottom: $sp-module-gap; }
 .menu-card { overflow: hidden; }
@@ -239,5 +244,11 @@ function onTabChange(tab) {
 @keyframes page-fade-in {
   0% { opacity: 0; transform: translateY(30rpx); }
   100% { opacity: 1; transform: translateY(0); }
+}
+
+.scroll-area {
+  height: 100vh;
+  padding-bottom: 180rpx;
+  box-sizing: border-box;
 }
 </style>

@@ -1,13 +1,18 @@
 <template>
   <view class="top-bar" :class="{ 'top-bar-scrolled': scrolled }">
-    <view class="top-bar-left">
-      <view v-if="showBack" class="back-btn pressable" @click="goBack">
-        <text class="back-icon">‹</text>
+    <!-- #ifdef H5 -->
+    <view class="h5-safe-top" />
+    <!-- #endif -->
+    <view class="top-bar-content">
+      <view class="top-bar-left">
+        <view v-if="showBack" class="back-btn pressable" @click="goBack">
+          <text class="back-icon">‹</text>
+        </view>
+        <text class="top-bar-title">{{ title }}</text>
       </view>
-      <text class="top-bar-title">{{ title }}</text>
-    </view>
-    <view class="top-bar-right">
-      <slot name="actions" />
+      <view class="top-bar-right">
+        <slot name="actions" />
+      </view>
     </view>
   </view>
 </template>
@@ -37,8 +42,7 @@ function goBack() {
   right: 0;
   z-index: 100;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
   padding: 0 $sp-page-margin;
   padding-top: constant(safe-area-inset-top);
   padding-top: env(safe-area-inset-top);
@@ -46,6 +50,24 @@ function goBack() {
   background-color: $color-background;
   transition: all $transition-screen;
 }
+
+.top-bar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+}
+
+/* #ifdef H5 */
+.top-bar {
+  padding-top: 0;
+}
+
+.top-bar .h5-safe-top {
+  flex-shrink: 0;
+  height: var(--safe-area-inset-top, 0px);
+}
+/* #endif */
 
 .top-bar-scrolled {
   background-color: rgba($color-surface-container-lowest, 0.9);

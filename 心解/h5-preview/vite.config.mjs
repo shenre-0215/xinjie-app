@@ -27,7 +27,10 @@ function rpxToPx() {
     postcssPlugin: 'rpx-to-px',
     Declaration(decl) {
       decl.value = decl.value.replace(/(\d+(?:\.\d+)?)rpx/g, (_, val) => {
-        return (parseFloat(val) / 2).toFixed(2).replace(/\.?0+$/, '') + 'px'
+        const rpxValue = parseFloat(val)
+        const screenWidth = 375
+        const pxValue = (rpxValue / 750) * screenWidth
+        return pxValue.toFixed(2).replace(/\.?0+$/, '') + 'px'
       })
       decl.value = decl.value.replace(/100vh/g, 'calc(var(--vh) * 100)')
     }

@@ -178,3 +178,55 @@
   padding-top: constant(safe-area-inset-top);
   padding-top: env(safe-area-inset-top);
 }
+
+/* === H5 Specific Styles === */
+@media screen and (max-width: 420px) {
+  .h5-page-container {
+    height: calc(var(--vh) * 100) !important;
+    max-height: calc(var(--vh) * 100) !important;
+    overflow: hidden;
+  }
+  
+  .h5-scroll-area {
+    height: calc(var(--vh) * 100) !important;
+    max-height: calc(var(--vh) * 100) !important;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .h5-safe-top {
+    height: var(--safe-area-inset-top, 0px);
+    flex-shrink: 0;
+  }
+  
+  .h5-safe-bottom {
+    height: var(--safe-area-inset-bottom, 0px);
+    flex-shrink: 0;
+  }
+  
+  .h5-tab-bar-wrapper {
+    padding-bottom: var(--safe-area-inset-bottom, 0px);
+  }
+  
+  input, textarea {
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+  
+  .pressable:active {
+    -webkit-transform: scale(0.95);
+    transform: scale(0.95);
+  }
+  
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media screen and (min-width: 421px) {
+  .h5-safe-top,
+  .h5-safe-bottom {
+    display: none;
+  }
+}

@@ -1,5 +1,8 @@
 <template>
   <view class="page-container">
+    <!-- #ifdef H5 -->
+    <view class="h5-safe-top" />
+    <!-- #endif -->
     <!-- Header -->
     <view class="header">
       <view class="header-left">
@@ -39,7 +42,7 @@
     </view>
 
     <!-- Post feed -->
-    <view class="feed-scroll">
+    <scroll-view scroll-y class="feed-scroll">
       <view class="feed-list">
         <view
           v-for="post in displayPosts"
@@ -103,7 +106,7 @@
         hint="看到触动你的光，点下那颗心"
       />
       <view style="height: 200rpx;" />
-    </view>
+    </scroll-view>
 
     <!-- FAB -->
     <view class="fab pressable" @click="goPublish">
@@ -256,7 +259,9 @@ function onTabChange(tab) {
 .sub-tab-active { color: $color-primary; font-weight: 600; }
 
 .feed-scroll {
+  height: 100vh;
   padding-bottom: 180rpx;
+  box-sizing: border-box;
 }
 
 .feed-list {

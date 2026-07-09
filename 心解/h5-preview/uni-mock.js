@@ -140,15 +140,17 @@ window.uni = {
 
   // System info
   getSystemInfoSync() {
+    const safeTop = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-top')) || 0
+    const safeBottom = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--safe-area-inset-bottom')) || 0
     return {
       platform: 'h5',
       screenWidth: window.innerWidth,
       screenHeight: window.innerHeight,
       windowWidth: window.innerWidth,
-      windowHeight: window.innerHeight,
+      windowHeight: window.innerHeight - safeTop - safeBottom,
       safeArea: {
-        top: 0, bottom: 0, left: 0, right: 0,
-        width: window.innerWidth, height: window.innerHeight
+        top: safeTop, bottom: safeBottom, left: 0, right: 0,
+        width: window.innerWidth, height: window.innerHeight - safeTop - safeBottom
       }
     }
   }
@@ -237,13 +239,54 @@ window.uniCloud = {
   }
 }
 
+function getSafeAreaInsets() {
+  const isMobile = window.innerWidth <= 420
+  if (!isMobile) {
+    return { top: 0, bottom: 0 }
+  }
+  
+  let safeTop = 0
+  let safeBottom = 0
+  
+  if (typeof window.visualViewport !== 'undefined') {
+    safeTop = window.visualViewport.offsetTop || 0
+    safeBottom = window.innerHeight - window.visualViewport.offsetTop - window.visualViewport.height
+  }
+  
+  const envTop = parseInt(window.getComputedStyle(document.documentElement).getPropertyValue('safe-area-inset-top')) || 0
+  const envBottom = parseInt(window.getComputedStyle(document.documentElement).getPropertyValue('safe-area-inset-bottom')) || 0
+  
+  safeTop = Math.max(safeTop, envTop)
+  safeBottom = Math.max(safeBottom, envBottom)
+  
+  if (safeTop === 0 && envTop === 0 && 'ontouchstart' in window) {
+    safeTop = 44
+  }
+  
+  if (safeBottom === 0 && envBottom === 0 && 'ontouchstart' in window) {
+    safeBottom = 34
+  }
+  
+  return { top: safeTop, bottom: safeBottom }
+}
+
 function setAppHeight() {
   const phone = document.getElementById('phone')
-  const appHeight = phone ? phone.clientHeight : window.innerHeight
+  const isMobile = window.innerWidth <= 420
+  let appHeight = phone ? phone.clientHeight : window.innerHeight
+  
+  const safeArea = getSafeAreaInsets()
+  
+  if (isMobile) {
+    appHeight = window.innerHeight
+  }
+  
   const vh = appHeight * 0.01
   
   document.documentElement.style.setProperty('--vh', vh + 'px')
   document.documentElement.style.setProperty('--app-height', appHeight + 'px')
+  document.documentElement.style.setProperty('--safe-area-inset-top', safeArea.top + 'px')
+  document.documentElement.style.setProperty('--safe-area-inset-bottom', safeArea.bottom + 'px')
   
   let existingStyle = document.getElementById('h5-preview-styles')
   if (existingStyle) existingStyle.remove()
@@ -252,8 +295,8 @@ function setAppHeight() {
   style.id = 'h5-preview-styles'
   style.textContent = `
     :root {
-      --safe-area-inset-top: 0px;
-      --safe-area-inset-bottom: 0px;
+      --safe-area-inset-top: ${safeArea.top}px;
+      --safe-area-inset-bottom: ${safeArea.bottom}px;
     }
     scroll-view[scroll-y] {
       display: block;
@@ -281,10 +324,38 @@ function setAppHeight() {
       max-height: calc(var(--vh) * 100) !important;
       min-height: 0;
     }
+    .h5-safe-top {
+      height: ${safeArea.top}px;
+      flex-shrink: 0;
+      background-color: #f9faf6;
+    }
+    .h5-safe-bottom {
+      height: ${safeArea.bottom}px;
+      flex-shrink: 0;
+      background-color: #f9faf6;
+    }
   `
   document.head.appendChild(style)
 }
 
+function handleOrientationChange() {
+  setTimeout(setAppHeight, 100)
+  setTimeout(setAppHeight, 500)
+}
+
+function handleResize() {
+  setAppHeight()
+}
+
+function handleVisualViewportResize() {
+  setAppHeight()
+}
+
 setTimeout(setAppHeight, 100)
 setTimeout(setAppHeight, 500)
-window.addEventListener('resize', setAppHeight)
+window.addEventListener('resize', handleResize)
+window.addEventListener('orientationchange', handleOrientationChange)
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', handleVisualViewportResize)
+  window.visualViewport.addEventListener('scroll', handleVisualViewportResize)
+}

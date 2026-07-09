@@ -1,5 +1,8 @@
 <template>
   <view class="page-container">
+    <!-- #ifdef H5 -->
+    <view class="h5-safe-top" />
+    <!-- #endif -->
     <view class="decor-top" />
     <view class="decor-plant" />
 

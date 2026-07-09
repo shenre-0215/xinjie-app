@@ -1,5 +1,8 @@
 <template>
   <view class="tab-bar">
+    <!-- #ifdef H5 -->
+    <view class="h5-safe-bottom" />
+    <!-- #endif -->
     <view
       v-for="tab in tabs"
       :key="tab.key"
@@ -60,6 +63,20 @@ function switchTab(tab) {
   box-shadow: $shadow-nav;
   border-radius: $radius-default $radius-default 0 0;
 }
+
+/* #ifdef H5 */
+.tab-bar {
+  padding-bottom: 0;
+}
+
+.tab-bar .h5-safe-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--safe-area-inset-bottom, 0px);
+}
+/* #endif */
 
 .tab-item {
   display: flex; flex-direction: column; align-items: center;

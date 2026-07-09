@@ -1,5 +1,8 @@
 <template>
   <view class="page-container">
+    <!-- #ifdef H5 -->
+    <view class="h5-safe-top" />
+    <!-- #endif -->
     <!-- Header -->
     <view class="header">
       <view class="header-left">
@@ -13,8 +16,9 @@
       </view>
     </view>
 
-    <!-- Network canvas -->
-    <view class="canvas-section">
+    <scroll-view scroll-y class="scroll-area">
+      <!-- Network canvas -->
+      <view class="canvas-section">
       <!-- Decorative blur -->
       <view class="canvas-bg-decor" />
 
@@ -122,12 +126,13 @@
     </view>
 
     <!-- Empty state for no nodes -->
-    <EmptyState
-      v-if="!xinwangState.nodes.length"
-      emoji="◎"
-      text="还没有心网节点"
-      hint="完成思考链后会生成节点，连接你的内心世界"
-    />
+      <EmptyState
+        v-if="!xinwangState.nodes.length"
+        emoji="◎"
+        text="还没有心网节点"
+        hint="完成思考链后会生成节点，连接你的内心世界"
+      />
+    </scroll-view>
 
     <TabBar current="xinwang" @change="onTabChange" />
   </view>
@@ -545,5 +550,11 @@ function onTabChange(tab) {
 .wv-title { font-size: $fs-body-lg; font-weight: 600; color: $color-on-surface; }
 .wv-desc { font-size: $fs-label-md; color: rgba($color-on-surface-variant, 0.6); }
 .wv-arrow { font-size: 44rpx; color: rgba($color-on-surface-variant, 0.4); }
+
+.scroll-area {
+  height: 100vh;
+  padding-bottom: 180rpx;
+  box-sizing: border-box;
+}
 
 </style>

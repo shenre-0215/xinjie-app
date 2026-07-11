@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pages: write
+      id-token: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -23,14 +25,16 @@ jobs:
 
       - name: Install and build
         run: |
-          ls -la
-          cd "心解" && ls -la
-          cd "h5-preview" && ls -la
+          cd "心解/h5-preview"
           npm install
           npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./心解/h5-preview/dist
+          name: github-pages
+          path: ./心解/h5-preview/dist
+          retention-days: 1
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

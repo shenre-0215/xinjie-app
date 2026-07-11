@@ -1,0 +1,127 @@
+{
+  "pages": [
+    {
+      "path": "pages/zhiji/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "织记",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/xinbao/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "心宝",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/xinwang/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "心网",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/zhiguang/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "织光",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/mine/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "我的",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/xinwang/full-view",
+      "style": {
+        "navigationBarTitleText": "全览",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/xinwang/node-detail",
+      "style": {
+        "navigationBarTitleText": "节点详情",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/xinwang/worldview",
+      "style": {
+        "navigationBarTitleText": "世界观",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/zhiji/thinking-chain",
+      "style": {
+        "navigationBarTitleText": "思考链",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/zhiji/insights",
+      "style": {
+        "navigationBarTitleText": "觉察报告",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/zhiji/suspend-list",
+      "style": {
+        "navigationBarTitleText": "悬置清单",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/zhiji/diary-edit",
+      "style": {
+        "navigationBarTitleText": "随记",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    }
+  ],
+  "tabBar": {
+    "custom": true,
+    "color": "#999999",
+    "selectedColor": "#3d6751",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/zhiji/index", "text": "织记" },
+      { "pagePath": "pages/xinbao/index", "text": "心宝" },
+      { "pagePath": "pages/xinwang/index", "text": "心网" },
+      { "pagePath": "pages/zhiguang/index", "text": "织光" },
+      { "pagePath": "pages/mine/index", "text": "我的" }
+    ]
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "心解",
+    "navigationBarBackgroundColor": "#f9faf6",
+    "backgroundColor": "#f9faf6",
+    "backgroundColorTop": "#f9faf6",
+    "backgroundColorBottom": "#f9faf6"
+  },
+}

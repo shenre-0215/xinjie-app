@@ -1,0 +1,1 @@
+function r(t,...e){if(typeof t=="function"){const o=i();t.call(null,(o==null?void 0:o.options)||{})}}function i(){return{options:p()}}function p(){const t=window.location.hash.replace("#/",""),[e,o]=t.split("?"),n={};return o&&o.split("&").forEach(s=>{const[c,a]=s.split("=");n[decodeURIComponent(c)]=decodeURIComponent(a||"")}),n.path=e||"",n}export{r as o};

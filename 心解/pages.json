@@ -100,6 +100,22 @@
         "navigationBarBackgroundColor": "#f9faf6",
         "navigationBarTextStyle": "black"
       }
+    },
+    {
+      "path": "pages/zhiji/record-detail",
+      "style": {
+        "navigationBarTitleText": "记录详情",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/zhiji/echoes",
+      "style": {
+        "navigationBarTitleText": "时光回响",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
     }
   ],
   "tabBar": {

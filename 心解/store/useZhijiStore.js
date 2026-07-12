@@ -107,6 +107,7 @@ async function _cloudAdd(record) {
       delta: record.delta,
       source: record.source || '',
       stepsContent: record.stepsContent || [],
+      echoTime: record.echoTime || null,
       createdAt: new Date()
     })
   } catch (e) {
@@ -166,7 +167,8 @@ export async function syncFromCloud(uid) {
           stepIndex: doc.stepIndex,
           delta: doc.delta,
           source: doc.source || '',
-          stepsContent: doc.stepsContent || []
+          stepsContent: doc.stepsContent || [],
+          echoTime: doc.echoTime || null
         }))
       _syncSuspended()
       _saveLocal()
@@ -199,7 +201,8 @@ export function addRecord(record) {
     suspendedDays: 0,
     delta: record.delta,
     source: record.source || '',
-    stepsContent: record.stepsContent || []
+    stepsContent: record.stepsContent || [],
+    echoTime: record.echoTime || null
   }
 
   zhijiState.records.unshift(newRecord)

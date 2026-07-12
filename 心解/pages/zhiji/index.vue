@@ -223,9 +223,9 @@ function moodLabel(mood) {
 function goDiaryEdit() { uni.navigateTo({ url: '/pages/zhiji/diary-edit' }) }
 function goThinkingChain() { uni.navigateTo({ url: '/pages/zhiji/thinking-chain' }) }
 function goSuspendList() { uni.navigateTo({ url: '/pages/zhiji/suspend-list' }) }
-function goRecordDetail(id) { uni.showToast({ title: '功能开发中', icon: 'none' }) }
+function goRecordDetail(id) { uni.navigateTo({ url: '/pages/zhiji/record-detail?id=' + id }) }
 function goInsights() { uni.navigateTo({ url: '/pages/zhiji/insights' }) }
-function goEchoes() { uni.showToast({ title: '功能开发中', icon: 'none' }) }
+function goEchoes() { uni.navigateTo({ url: '/pages/zhiji/echoes' }) }
 
 function onTabChange(tab) {
   switchTab(tab)

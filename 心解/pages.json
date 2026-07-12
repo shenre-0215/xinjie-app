@@ -132,6 +132,62 @@
         "navigationBarBackgroundColor": "#f9faf6",
         "navigationBarTextStyle": "black"
       }
+    },
+    {
+      "path": "pages/mine/login",
+      "style": {
+        "navigationBarTitleText": "登录",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/mine/settings",
+      "style": {
+        "navigationBarTitleText": "设置",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/mine/profile-edit",
+      "style": {
+        "navigationBarTitleText": "编辑资料",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/mine/feedback",
+      "style": {
+        "navigationBarTitleText": "反馈与帮助",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/mine/growth",
+      "style": {
+        "navigationBarTitleText": "成长档案",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/mine/favorites",
+      "style": {
+        "navigationBarTitleText": "我的收藏",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/mine/about",
+      "style": {
+        "navigationBarTitleText": "关于心解",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
     }
   ],
   "tabBar": {

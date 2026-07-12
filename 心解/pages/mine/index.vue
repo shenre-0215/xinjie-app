@@ -140,15 +140,28 @@ function showMenu() {
 }
 
 function goLogin() {
-  uni.showToast({ title: '功能开发中', icon: 'none' })
+  uni.navigateTo({ url: '/pages/mine/login' })
 }
 
 function goPage(page) {
-  uni.showToast({ title: '功能开发中', icon: 'none' })
+  const routes = {
+    'profile-edit': '/pages/mine/profile-edit',
+    'growth': '/pages/mine/growth',
+    'settings': '/pages/mine/settings',
+    'feedback': '/pages/mine/feedback',
+    'about': '/pages/mine/about',
+    'worldview': '/pages/xinwang/worldview'
+  }
+  const url = routes[page]
+  if (url) {
+    uni.navigateTo({ url })
+  } else {
+    uni.showToast({ title: '功能开发中', icon: 'none' })
+  }
 }
 
 function goFavorites() {
-  uni.showToast({ title: '功能开发中', icon: 'none' })
+  uni.navigateTo({ url: '/pages/mine/favorites' })
 }
 
 function onTabChange(tab) {

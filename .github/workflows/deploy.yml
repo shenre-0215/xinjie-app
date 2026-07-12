@@ -50,6 +50,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: 心解/dist
+          publish_dir: 心解/dist/build/h5
           publish_branch: gh-pages
           force_orphan: true

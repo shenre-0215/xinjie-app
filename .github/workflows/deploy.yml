@@ -23,20 +23,8 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Setup src directory
-        run: |
-          mkdir -p src
-          cp ../manifest.json src/manifest.json
-          cp ../pages.json src/pages.json
-          cp ../main.js src/main.js
-          cp ../App.vue src/App.vue
-          cp -r ../pages src/pages
-          cp -r ../store src/store
-          cp -r ../components src/components
-          cp -r ../utils src/utils
-          cp -r ../mock src/mock
-          cp -r ../styles src/styles
-          ls -R src/ | head -30
+      - name: Verify src structure
+        run: ls src/pages/zhiji/index.vue && echo "Pages found OK"
 
       - name: Install dependencies
         run: npm install

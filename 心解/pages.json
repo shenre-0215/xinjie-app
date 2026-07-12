@@ -116,6 +116,22 @@
         "navigationBarBackgroundColor": "#f9faf6",
         "navigationBarTextStyle": "black"
       }
+    },
+    {
+      "path": "pages/zhiguang/publish",
+      "style": {
+        "navigationBarTitleText": "分享到织光",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
+    },
+    {
+      "path": "pages/zhiguang/detail",
+      "style": {
+        "navigationBarTitleText": "织光详情",
+        "navigationBarBackgroundColor": "#f9faf6",
+        "navigationBarTextStyle": "black"
+      }
     }
   ],
   "tabBar": {

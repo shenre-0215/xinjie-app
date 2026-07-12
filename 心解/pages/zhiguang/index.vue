@@ -161,11 +161,11 @@ function openMenu() {
 }
 
 function goDetail(id) {
-  uni.showToast({ title: '功能开发中', icon: 'none' })
+  uni.navigateTo({ url: '/pages/zhiguang/detail?id=' + id })
 }
 
 function goPublish() {
-  uni.showToast({ title: '功能开发中', icon: 'none' })
+  uni.navigateTo({ url: '/pages/zhiguang/publish' })
 }
 
 function confirmDelete(post) {

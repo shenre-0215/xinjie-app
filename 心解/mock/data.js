@@ -124,7 +124,65 @@ export const zhijiRecords = [
 
 export const suspendedItems = []
 
-export const zhiguangPosts = []
+export const zhiguangPosts = [
+  {
+    id: 'p001',
+    author: '林间小路',
+    time: '3小时前',
+    anonymous: false,
+    category: '觉察',
+    content: '今天终于明白了：焦虑不是因为事情多，是因为我在意结果。当我允许自己"做不好也没关系"的时候，那种紧绷感自然就松了。\n\n分享给所有正在拧紧的人。',
+    tags: ['觉察', '焦虑', '自我接纳'],
+    resonated: false,
+    resonatedCount: 24,
+    comments: [
+      { id: 'cmt1', author: '远方的星', content: '深有同感，允许一切发生的那一刻，一切都变了', time: '2小时前' },
+      { id: 'cmt2', author: '静水深流', content: '"做不好也没关系"——这句话我要记下来贴在桌面上', time: '1小时前' }
+    ]
+  },
+  {
+    id: 'p002',
+    author: '匿名织者',
+    time: '6小时前',
+    anonymous: true,
+    category: '释然',
+    content: '今天做了一个决定：不再跟那个总是挑剔我的人解释自己。不是逃避，是终于明白，有些人的评价只是他们内心的投射。我只需要对自己诚实。\n\n匿名发，因为还在学习不被别人的看法左右。',
+    tags: ['释然', '边界', '自我'],
+    resonated: false,
+    resonatedCount: 47,
+    comments: [
+      { id: 'cmt3', author: '清风', content: '边界感是保护自己内心花园的篱笆，不是墙', time: '5小时前' },
+      { id: 'cmt4', author: '月亮上的兔子', content: '勇敢的选择！匿名也没关系，这份力量是真实的', time: '3小时前' },
+      { id: 'cmt5', author: '听风的人', content: '我也在学习这件事，一起加油', time: '1小时前' }
+    ]
+  },
+  {
+    id: 'p003',
+    author: '旭日东升',
+    time: '昨天',
+    anonymous: false,
+    category: '成长',
+    content: '做觉察练习第 30 天了。从刚开始连自己的情绪都叫不出名字，到现在能清晰地分辨"这个是焦虑""那个是疲惫""这个是期待"。\n\n最大的收获：情绪不是我，它们只是路过我。\n\n继续。⛅',
+    tags: ['觉察', '成长', '30天'],
+    resonated: false,
+    resonatedCount: 63,
+    comments: [
+      { id: 'cmt6', author: '银河列车', content: '30天不容易！"情绪只是路过"说得太好了', time: '20小时前' }
+    ]
+  },
+  {
+    id: 'p004',
+    author: '溪水潺潺',
+    time: '2天前',
+    anonymous: false,
+    category: '温暖',
+    content: '今天在地铁上看到一个陌生人偷偷在哭。我没有说话，只是递了一包纸巾过去。她愣了一下，然后轻轻点了点头。\n\n希望她知道，这个世界有人在默默地、温柔地注视着她。',
+    tags: ['温暖', '陌生人', '善意'],
+    resonated: false,
+    resonatedCount: 112,
+    comments: []
+  }
+]
 
 export const worldviewData = {
   shixiang: [

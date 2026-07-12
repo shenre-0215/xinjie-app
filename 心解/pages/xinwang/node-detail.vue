@@ -9,7 +9,7 @@
     </view>
 
     <view v-if="node" class="content">
-      <NodeHeroCard :node="node" />
+      <NodeHeroCard :node="node" :connectedCount="connectedNodes.length" />
 
       <!-- ── 织记 · 思考链节点 ── -->
       <template v-if="node.sourceType === 'zhiji'">
@@ -73,7 +73,7 @@
         <text class="section-title">连接节点</text>
         <view v-if="connectedNodes.length" class="conn-list">
           <view v-for="cn in connectedNodes" :key="cn.id" class="conn-chip pressable" @click="goNodeDetail(cn.id)">
-            <view class="conn-dot" :class="getConnDotClass(cn)" />
+            <view class="conn-dot" :class="getConnClass(cn)" />
             <text>{{ cn.label }}</text>
           </view>
         </view>
@@ -93,6 +93,7 @@ import { zhijiState } from '../../store/useZhijiStore.js'
 import { xinbaoState } from '../../store/useXinbaoStore.js'
 import EmptyState from '../../components/EmptyState.vue'
 import NodeHeroCard from './NodeHeroCard.vue'
+import { getConnDotClass } from '../../utils/emotionColors.js'
 
 const node = ref(null)
 
@@ -112,13 +113,8 @@ const statusLabel = computed(() => {
   return map[node.value && node.value.status] || '未知'
 })
 
-function getConnDotClass(n) {
-  if (n.type === 'hub') return 'conn-hub'
-  if (n.emotion) {
-    const em = { '释然': 'conn-blue', '平静': 'conn-blue', '喜悦': 'conn-green', '成长': 'conn-green', '悲伤': 'conn-purple', '失落': 'conn-purple', '愤怒': 'conn-orange', '焦虑': 'conn-orange', '迷茫': 'conn-gold', '探索': 'conn-gold' }
-    return em[n.emotion] || 'conn-default'
-  }
-  return 'conn-default'
+function getConnClass(n) {
+  return getConnDotClass(n)
 }
 
 const connectedNodes = computed(() => {

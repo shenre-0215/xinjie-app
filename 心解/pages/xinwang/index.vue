@@ -3,135 +3,125 @@
     <!-- #ifdef H5 -->
     <view class="h5-safe-top" />
     <!-- #endif -->
-    <!-- Header -->
+
     <view class="header">
       <view class="header-left">
         <text class="header-icon">⊛</text>
         <text class="header-title">心网</text>
       </view>
-      <view class="header-right">
-        <view class="refresh-btn pressable" @click="refreshNetwork">
-          <text class="refresh-icon">↻</text>
-        </view>
+      <view class="header-right pressable" @click="refreshNetwork">
+        <text class="refresh-icon">↻</text>
       </view>
     </view>
 
     <scroll-view scroll-y class="scroll-area">
-      <!-- Network canvas -->
-      <view class="canvas-section">
-      <!-- Decorative blur -->
-      <view class="canvas-bg-decor" />
-
-      <!-- SVG-like node network using positioned views -->
+      <!-- Starfield canvas -->
       <view
-        class="canvas-area"
-        :style="canvasTransform"
+        class="canvas-section"
         @touchstart="onTouchStart"
         @touchmove="onTouchMove"
         @touchend="onTouchEnd"
       >
-        <!-- Connection lines (simplified as positioned elements) -->
-        <view class="connections-layer">
+        <view class="canvas-bg" />
+        <view class="bg-stars" />
+
+        <view class="canvas-area" :style="canvasTransform">
+          <!-- Connection lines -->
+          <view class="connections-layer">
+            <view
+              v-for="edge in xinwangState.edges"
+              :key="edge.from + '-' + edge.to"
+              class="connection-line"
+              :style="getLineStyle(edge)"
+            />
+          </view>
+
+          <!-- Star nodes -->
           <view
-            v-for="edge in xinwangState.edges"
-            :key="edge.from + '-' + edge.to"
-            class="connection-line"
-            :style="getLineStyle(edge)"
-          />
-        </view>
-
-        <!-- Nodes -->
-        <view
-          v-for="node in xinwangState.nodes"
-          :key="node.id"
-          class="network-node"
-          :class="['node-' + node.status, 'node-' + node.type]"
-          :style="getNodeStyle(node)"
-          @touchstart.stop="onNodeTouchStart($event, node)"
-          @touchmove.stop="onNodeTouchMove($event, node)"
-          @touchend.stop="onNodeTouchEnd($event, node)"
-        >
-          <text class="node-label-text">{{ node.label }}</text>
-          <text v-if="node.delta !== undefined" class="node-delta-text">δ {{ node.delta }}</text>
-        </view>
-      </view>
-
-      <!-- Floating stat label -->
-      <view class="float-label">
-        <text class="float-text">已建立 {{ xinwangState.nodes.length }} 个节点</text>
-      </view>
-
-      <!-- Zoom controls -->
-      <view class="zoom-controls">
-        <view class="zoom-btn pressable" @click="zoomIn">
-          <text class="zoom-icon">＋</text>
-        </view>
-        <view class="zoom-btn pressable" @click="zoomOut">
-          <text class="zoom-icon">−</text>
-        </view>
-        <view class="zoom-btn pressable" @click="zoomReset" :class="{ 'zoom-dim': scale === 1 }">
-          <text class="zoom-icon zoom-reset-icon">◎</text>
-        </view>
-      </view>
-    </view>
-
-    <!-- Stats section -->
-    <view class="stats-section">
-      <view class="stats-header">
-        <text class="stats-title">内在生长状态</text>
-        <text class="stats-subtitle">更新于 {{ nowLabel }}</text>
-      </view>
-
-      <view class="stats-grid">
-        <view class="stat-card card">
-          <text class="stat-label-sm">心网密度</text>
-          <text class="stat-value text-primary">{{ densityLabel }}</text>
-          <view class="stat-bar">
-            <view class="stat-bar-fill" :style="{ width: densityPercent + '%' }" />
+            v-for="node in xinwangState.nodes"
+            :key="node.id"
+            class="star-node"
+            :class="[statusClass(node)]"
+            :style="getNodeStyle(node)"
+            @touchstart.stop="onNodeTouchStart($event, node)"
+            @touchmove.stop.prevent="onNodeTouchMove($event, node)"
+            @touchend.stop="onNodeTap($event, node)"
+          >
+            <view class="star-core" :style="getStarCoreStyle(node)" />
           </view>
         </view>
-        <view class="stat-card card">
-          <text class="stat-label-sm">连接强度</text>
-          <text class="stat-value text-tertiary">{{ connectionLabel }}</text>
-          <view class="dot-indicators">
-            <view class="dot" :class="dotClass(0)" />
-            <view class="dot" :class="dotClass(1)" />
-            <view class="dot" :class="dotClass(2)" />
+
+        <!-- Float label -->
+        <view class="float-label">
+          <text>已建立 {{ xinwangState.nodes.length }} 个节点</text>
+        </view>
+
+        <!-- Zoom controls -->
+        <view class="zoom-ctrls">
+          <view class="zoom-btn pressable" @click="zoomIn"><text>+</text></view>
+          <view class="zoom-btn pressable" @click="zoomOut"><text>-</text></view>
+          <view class="zoom-btn pressable" @click="zoomReset"><text>O</text></view>
+        </view>
+
+        <!-- Full-view entry -->
+        <view class="fullview-btn pressable" @click="goFullView">
+          <text class="fullview-text">全览</text>
+        </view>
+      </view>
+
+      <!-- Stats -->
+      <view class="stats-section">
+        <view class="stats-header">
+          <text class="stats-title">内在生长状态</text>
+          <text class="stats-time">{{ nowLabel }}</text>
+        </view>
+        <view class="stats-grid">
+          <view class="stat-card">
+            <text class="stat-number">{{ densityPercent }}%</text>
+            <text class="stat-label">心网密度 · {{ densityLabel }}</text>
+            <view class="stat-bar"><view class="stat-fill" :style="{ width: densityPercent + '%' }" /></view>
+          </view>
+          <view class="stat-card">
+            <text class="stat-number">{{ connectionLabel }}</text>
+            <text class="stat-label">连接强度</text>
+            <view class="stat-dots">
+              <view v-for="i in 3" :key="i" class="stat-dot" :class="dotClass(i - 1)" />
+            </view>
           </view>
         </view>
       </view>
 
-      <!-- 内心世界入口 -->
-      <view class="worldview-card pressable-subtle" @click="goWorldview">
-        <view class="wv-left">
-          <text class="wv-icon">◎</text>
-          <view class="wv-body">
-            <text class="wv-title">我 · 内心世界</text>
-            <text class="wv-desc">世相 · 我行 · 心秤 — 你精神世界的根基</text>
+      <!-- Worldview entry -->
+      <view class="section">
+        <view class="entry-card pressable-subtle" @click="goWorldview">
+          <text class="entry-icon">◎</text>
+          <view class="entry-info">
+            <text class="entry-title">我 · 内心世界</text>
+            <text class="entry-hint">三观体系 {{ worldviewCount }} 条目</text>
           </view>
-        </view>
-        <text class="wv-arrow">›</text>
-      </view>
-
-      <!-- Inspirational card -->
-      <view class="inspire-card">
-        <view class="inspire-body">
-          <text class="inspire-title">{{ xinwangState.nodes.length ? '新的枝桠正在伸展' : '你的心网还是一片土壤' }}</text>
-          <text class="inspire-text">{{ xinwangState.nodes.length ? latestInsight : '打开心宝聊一聊，或完成一条思考链，这里会开始生长。' }}</text>
-        </view>
-        <view class="inspire-decor">
-          <text class="inspire-mascot">🌿</text>
+          <text class="entry-arrow">›</text>
         </view>
       </view>
-    </view>
 
-    <!-- Empty state for no nodes -->
+      <!-- Latest insight -->
+      <view v-if="latestInsight" class="section">
+        <view class="insight-card">
+          <view class="insight-header">
+            <text class="insight-emoji">🌿</text>
+            <text class="insight-title">{{ xinwangState.nodes.length ? '今天在想什么' : '开始你的心网' }}</text>
+          </view>
+          <text class="insight-text">{{ latestInsight }}</text>
+        </view>
+      </view>
+
       <EmptyState
         v-if="!xinwangState.nodes.length"
         emoji="◎"
         text="还没有心网节点"
         hint="完成思考链后会生成节点，连接你的内心世界"
       />
+
+      <view class="bottom-spacer" />
     </scroll-view>
 
     <TabBar current="xinwang" @change="onTabChange" />
@@ -141,22 +131,30 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { xinwangState, updateNode, syncFromCloud } from '../../store/useXinwangStore.js'
-import { authState } from '../../store/useAuthStore.js'
 import { switchTab } from '../../store/useAppStore.js'
+import { getNodeGlowStyle, getEdgeGlowStyle, getNodeSize, getEmotionColorKey } from '../../utils/emotionColors.js'
 import TabBar from '../../components/TabBar.vue'
 import EmptyState from '../../components/EmptyState.vue'
 
-// Dynamic stats
+// Stats
 const densityPercent = computed(() => Math.min(100, xinwangState.nodes.length * 5))
 const densityLabel = computed(() => {
   const p = densityPercent.value
   return p <= 25 ? '萌芽' : p <= 50 ? '生长' : p <= 75 ? '繁茂' : '成林'
 })
-const connectionLabel = computed(() => xinwangState.edges.length <= 3 ? '初始' : xinwangState.edges.length <= 8 ? '扩展' : '交织')
+const connectionLabel = computed(() =>
+  xinwangState.edges.length <= 3 ? '初始' : xinwangState.edges.length <= 8 ? '扩展' : '交织'
+)
 function dotClass(i) {
   const e = xinwangState.edges.length
   return e > i * 4 ? 'active' : e > i * 4 - 2 ? 'half' : 'dim'
 }
+
+const worldviewCount = computed(() =>
+  xinwangState.worldview.shixiang.length +
+  xinwangState.worldview.woxing.length +
+  xinwangState.worldview.xincheng.length
+)
 
 const nowLabel = computed(() => {
   const d = new Date()
@@ -174,138 +172,147 @@ const latestInsight = computed(() => {
   return `最近的思考围绕 ${labels} 展开。你的心网正在自然生长。`
 })
 
-// Pan/zoom state
+// Pan / zoom
 const panX = ref(0)
 const panY = ref(0)
-const scale = ref(1)
-
+const scaleVal = ref(1)
 const canvasTransform = computed(() => ({
-  transform: `translate(${panX.value}px, ${panY.value}px) scale(${scale.value})`,
+  transform: `translate(${panX.value}px, ${panY.value}px) scale(${scaleVal.value})`,
   transformOrigin: 'center center',
-  transition: 'transform 0.1s ease-out'
+  transition: 'transform 0.15s ease-out'
 }))
 
-function zoomIn() {
-  scale.value = Math.min(2.5, scale.value + 0.25)
-}
-function zoomOut() {
-  scale.value = Math.max(0.5, scale.value - 0.25)
-}
-function zoomReset() {
-  panX.value = 0
-  panY.value = 0
-  scale.value = 1
-}
+function zoomIn() { scaleVal.value = Math.min(2.5, scaleVal.value + 0.2) }
+function zoomOut() { scaleVal.value = Math.max(0.5, scaleVal.value - 0.2) }
+function zoomReset() { scaleVal.value = 1; panX.value = 0; panY.value = 0 }
 
-// Touch handlers for pan + pinch zoom
-let sX = 0, sY = 0, sD = 0, spX = 0, spY = 0, sS = 1
+// Touch state
+let touchStartDist = 0
+let touchStartScale = 1
+let touchStartPan = { x: 0, y: 0 }
+let isDraggingNode = false
+let dragNodeId = null
+
 function onTouchStart(e) {
-  if (e.touches.length === 1) {
-    sX = e.touches[0].clientX; sY = e.touches[0].clientY
-    spX = panX.value; spY = panY.value
-  } else if (e.touches.length === 2) {
-    sD = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY)
-    sS = scale.value
+  if (e.touches.length === 2) {
+    touchStartDist = Math.hypot(
+      e.touches[0].clientX - e.touches[1].clientX,
+      e.touches[0].clientY - e.touches[1].clientY
+    )
+    touchStartScale = scaleVal.value
+  } else if (e.touches.length === 1 && !isDraggingNode) {
+    touchStartPan = { x: e.touches[0].clientX - panX.value, y: e.touches[0].clientY - panY.value }
   }
 }
-function onTouchMove(e) {
-  if (e.touches.length === 1) {
-    panX.value = spX + e.touches[0].clientX - sX
-    panY.value = spY + e.touches[0].clientY - sY
-  } else if (e.touches.length === 2) {
-    const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY)
-    scale.value = Math.min(2.5, Math.max(0.5, sS * (d / sD)))
-  }
-}
-function onTouchEnd() {}
 
+function onTouchMove(e) {
+  if (e.touches.length === 2) {
+    const dist = Math.hypot(
+      e.touches[0].clientX - e.touches[1].clientX,
+      e.touches[0].clientY - e.touches[1].clientY
+    )
+    scaleVal.value = Math.min(2.5, Math.max(0.5, touchStartScale * (dist / touchStartDist)))
+  } else if (e.touches.length === 1 && !isDraggingNode) {
+    panX.value = e.touches[0].clientX - touchStartPan.x
+    panY.value = e.touches[0].clientY - touchStartPan.y
+  }
+}
+
+function onTouchEnd() { /* handled by per-node */ }
+
+function onNodeTouchStart(e, node) {
+  if (e.touches.length === 1) {
+    isDraggingNode = false
+    dragNodeId = node.id
+    touchStartPan = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+  }
+}
+
+function onNodeTouchMove(e, node) {
+  if (e.touches.length === 1 && dragNodeId === node.id) {
+    const dx = e.touches[0].clientX - touchStartPan.x
+    const dy = e.touches[0].clientY - touchStartPan.y
+    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) isDraggingNode = true
+    if (isDraggingNode) {
+      const nx = Math.min(600, Math.max(0, node.x + dx / scaleVal.value))
+      const ny = Math.min(600, Math.max(0, node.y + dy / scaleVal.value))
+      updateNode(node.id, { x: Math.round(nx), y: Math.round(ny) })
+      touchStartPan = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+    }
+  }
+}
+
+function onNodeTap(e, node) {
+  if (!isDraggingNode) {
+    uni.navigateTo({ url: '/pages/xinwang/node-detail?id=' + node.id })
+  }
+  isDraggingNode = false
+}
+
+// Node styling
 function getNodeStyle(node) {
-  const isHub = node.type === 'hub'
-  const size = isHub ? 72 : 48
+  const size = getNodeSize(node)
+  const px = node.x * 0.7 + 40
+  const py = node.y * 0.7 + 20
   return {
-    left: (node.x * 0.7 + 40) + 'rpx',
-    top: (node.y * 0.7 + 20) + 'rpx',
+    left: px + 'rpx',
+    top: py + 'rpx',
     width: size + 'rpx',
     height: size + 'rpx'
   }
 }
 
-function getNodeCenter(node) {
-  const isHub = node.type === 'hub'
-  const size = isHub ? 72 : 48
-  return {
-    x: node.x * 0.7 + 40 + size / 2,
-    y: node.y * 0.7 + 20 + size / 2
-  }
+function getStarCoreStyle(node) {
+  return getNodeGlowStyle(node)
+}
+
+function statusClass(node) {
+  if (node.status === 'suspended') return 'star-suspended'
+  if (node.type === 'hub') return 'star-hub'
+  return ''
 }
 
 function getLineStyle(edge) {
   const fromNode = xinwangState.nodes.find(n => n.id === edge.from)
   const toNode = xinwangState.nodes.find(n => n.id === edge.to)
-  if (!fromNode || !toNode) return { display: 'none' }
+  if (!fromNode || !toNode) return {}
 
-  const from = getNodeCenter(fromNode)
-  const to = getNodeCenter(toNode)
-  const dx = to.x - from.x
-  const dy = to.y - from.y
+  const cx1 = fromNode.x * 0.7 + 40
+  const cy1 = fromNode.y * 0.7 + 20
+  const cx2 = toNode.x * 0.7 + 40
+  const cy2 = toNode.y * 0.7 + 20
+  const dx = cx2 - cx1
+  const dy = cy2 - cy1
   const length = Math.sqrt(dx * dx + dy * dy)
-  const angle = Math.atan2(dy, dx) * 180 / Math.PI
+  const angle = Math.atan2(dy, dx) * (180 / Math.PI)
+
+  const glowStyle = getEdgeGlowStyle(fromNode, toNode)
 
   return {
-    left: from.x + 'rpx',
-    top: from.y + 'rpx',
+    left: cx1 + 'rpx',
+    top: cy1 + 'rpx',
     width: length + 'rpx',
     transform: `rotate(${angle}deg)`,
-    transformOrigin: '0 50%'
+    transformOrigin: '0 50%',
+    ...glowStyle
   }
 }
 
-// Per-node drag: short tap = detail, drag = reposition
-let dragNode = null, ndSX = 0, ndSY = 0, dragged = false
-function onNodeTouchStart(e, node) { dragNode = node; dragged = false; ndSX = e.touches[0].clientX; ndSY = e.touches[0].clientY }
-function onNodeTouchMove(e, node) {
-  if (!dragNode) return
-  const dx = (e.touches[0].clientX - ndSX) / scale.value, dy = (e.touches[0].clientY - ndSY) / scale.value
-  if (Math.abs(dx) > 3 || Math.abs(dy) > 3) dragged = true
-  if (dragged) {
-    const newX = node.x + dx * 0.5, newY = node.y + dy * 0.5
-    // [🔥] Clamp within canvas bounds (600rpx × 600rpx, minus node size)
-    const size = node.type === 'hub' ? 72 : 48
-    const clampedX = Math.max(0, Math.min(600 - size, newX))
-    const clampedY = Math.max(0, Math.min(600 - size, newY))
-    updateNode(node.id, { x: clampedX, y: clampedY })
-    ndSX = e.touches[0].clientX; ndSY = e.touches[0].clientY
-  }
-}
-function onNodeTouchEnd(e, node) { if (!dragged) showNodePreview(node); dragNode = null; dragged = false }
-
-function showNodePreview(node) {
-  uni.navigateTo({ url: '/pages/xinwang/node-detail?id=' + node.id })
-}
+// Navigation
+function goFullView() { uni.navigateTo({ url: '/pages/xinwang/full-view' }) }
+function goWorldview() { uni.navigateTo({ url: '/pages/xinwang/worldview' }) }
 
 async function refreshNetwork() {
-  if (!authState.uid) {
-    uni.showToast({ title: '请先登录', icon: 'none' })
-    return
-  }
   uni.showLoading({ title: '同步中...' })
-  await syncFromCloud(authState.uid)
+  try { await syncFromCloud() } catch (e) { /* ignore */ }
   uni.hideLoading()
-  uni.showToast({ title: '已刷新', icon: 'success' })
-}
-
-
-function goWorldview() {
-  uni.navigateTo({ url: '/pages/xinwang/worldview' })
 }
 
 function onTabChange(tab) {
   switchTab(tab)
   const routes = {
-    zhiji: '/pages/zhiji/index',
-    xinbao: '/pages/xinbao/index',
-    xinwang: '/pages/xinwang/index',
-    zhiguang: '/pages/zhiguang/index',
+    zhiji: '/pages/zhiji/index', xinbao: '/pages/xinbao/index',
+    xinwang: '/pages/xinwang/index', zhiguang: '/pages/zhiguang/index',
     mine: '/pages/mine/index'
   }
   uni.switchTab({ url: routes[tab] })
@@ -316,245 +323,176 @@ function onTabChange(tab) {
 @import '@/styles/variables.scss';
 @import '@/styles/mixins.scss';
 
-.page-container { @include page-container; padding-top: calc(env(safe-area-inset-top) + 88rpx); @include fade-in; }
+.page-container {
+  @include page-container;
+  padding-top: calc(env(safe-area-inset-top) + 88rpx);
+}
 
 .header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
   padding: 0 32rpx;
   padding-top: constant(safe-area-inset-top);
   padding-top: env(safe-area-inset-top);
   padding-bottom: 16rpx;
-  display: flex; align-items: center;
-  background-color: $color-background;
+  background-color: #0a0f1a;
 }
+.header-left { display: flex; align-items: center; gap: 20rpx; }
+.header-icon { font-size: 40rpx; color: rgba($color-primary, 0.8); }
+.header-title { font-family: $font-headline; font-size: $fs-headline-md; font-weight: 600; color: rgba(255,255,255,0.9); }
+.refresh-icon { font-size: 44rpx; color: rgba(255,255,255,0.5); padding: 8rpx 16rpx; }
 
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 20rpx;
-}
-
-.header-icon {
-  font-size: 40rpx;
-  color: $color-primary;
-}
-
-.header-title {
-  font-family: $font-headline;
-  font-size: $fs-headline-md;
-  font-weight: 600;
-  color: $color-primary;
-}
-
-.header-right { display: flex; align-items: center; }
-.refresh-btn { width: 64rpx; height: 64rpx; display: flex; align-items: center; justify-content: center; border-radius: $radius-full; background-color: $color-surface-container-low; }
-.refresh-icon { font-size: 40rpx; color: $color-primary; font-weight: 700; }
-
+// ── Canvas section ──
 .canvas-section {
-  position: relative; width: 100%; height: 640rpx;
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden !important;
+  position: relative; height: 640rpx; overflow: hidden;
+  background: linear-gradient(180deg, #0a0f1a 0%, #121826 50%, #0f131e 100%);
 }
-.canvas-bg-decor {
-  position: absolute; width: 512rpx; height: 512rpx; border-radius: $radius-full;
-  background-color: rgba($color-primary-container, 0.4); filter: blur(80rpx); opacity: 0.3;
-}
-.canvas-area { position: relative; width: 600rpx; height: 600rpx; overflow: hidden; }
-.connections-layer { position: absolute; inset: 0; }
-.connection-line {
-  position: absolute; height: 4rpx;
-  background-color: rgba($color-primary, 0.15); transform-origin: left center;
-}
-
-.network-node {
-  position: absolute;
+.canvas-bg {
+  position: absolute; top: 50%; left: 50%;
+  width: 500rpx; height: 500rpx;
+  margin-left: -250rpx; margin-top: -250rpx;
   border-radius: $radius-full;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform $transition-press;
-  animation: nodeIn 0.4s ease-out both;
-
-  &:active {
-    transform: scale(1.15);
+  background: radial-gradient(circle, rgba($color-primary, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.bg-stars {
+  position: absolute; inset: 0; pointer-events: none;
+  &::after {
+    content: ''; position: absolute; width: 2rpx; height: 2rpx; background: white; border-radius: $radius-full;
+    box-shadow:
+      30rpx 60rpx 0 rgba(255,255,255,0.7), 120rpx 30rpx 0 rgba(255,255,255,0.5),
+      200rpx 80rpx 0 rgba(255,255,255,0.6), 280rpx 50rpx 0 rgba(255,255,255,0.4),
+      350rpx 120rpx 0 rgba(255,255,255,0.7), 450rpx 40rpx 0 rgba(255,255,255,0.5),
+      520rpx 90rpx 0 rgba(255,255,255,0.3), 580rpx 60rpx 0 rgba(255,255,255,0.6),
+      80rpx 160rpx 0 rgba(255,255,255,0.4), 160rpx 140rpx 0 rgba(255,255,255,0.6),
+      240rpx 200rpx 0 rgba(255,255,255,0.3), 400rpx 180rpx 0 rgba(255,255,255,0.5),
+      500rpx 200rpx 0 rgba(255,255,255,0.4), 60rpx 280rpx 0 rgba(255,255,255,0.5),
+      180rpx 300rpx 0 rgba(255,255,255,0.3), 320rpx 280rpx 0 rgba(255,255,255,0.6),
+      460rpx 300rpx 0 rgba(255,255,255,0.4), 560rpx 260rpx 0 rgba(255,255,255,0.5),
+      100rpx 380rpx 0 rgba(255,255,255,0.4), 260rpx 400rpx 0 rgba(255,255,255,0.3),
+      380rpx 350rpx 0 rgba(255,255,255,0.5), 520rpx 380rpx 0 rgba(255,255,255,0.4);
   }
 }
 
-@keyframes nodeIn {
-  from { transform: scale(0); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+.canvas-area {
+  position: absolute; inset: 0; transition: transform 0.15s ease-out;
 }
 
-.node-completed { background-color: $color-primary-container; }
-.node-in-progress { border: 3rpx dashed $color-primary; background-color: transparent; }
-.node-suspended { background-color: $color-tertiary-fixed-dim; opacity: 0.4; }
-.node-hub {
-  width: 88rpx !important; height: 88rpx !important;
-  background-color: $color-primary !important;
-  box-shadow: 0 0 0 16rpx rgba($color-primary-container, 0.2);
+// ── Connection lines ──
+.connections-layer { position: absolute; inset: 0; pointer-events: none; }
+.connection-line {
+  position: absolute; height: 2rpx; border-radius: 1rpx;
+  opacity: 0.4;
+  animation: edgePulse 4s ease-in-out infinite;
 }
-.node-label-text { font-size: 18rpx; color: $color-primary; font-weight: 600; }
-.node-delta-text { font-size: 14rpx; color: rgba($color-primary, 0.55); font-weight: 500; margin-top: 4rpx; }
-.node-hub .node-label-text { color: $color-on-primary; font-size: 22rpx; }
-.node-suspended .node-label-text { color: $color-tertiary; }
 
-.zoom-controls {
-  position: absolute; bottom: 16rpx; right: 16rpx; z-index: 20;
-  display: flex; flex-direction: column; gap: 12rpx;
+// ── Star nodes ──
+.star-node {
+  position: absolute; border-radius: $radius-full;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  &.star-hub {
+    animation: hubGlow 3s ease-in-out infinite;
+  }
+  &.star-suspended {
+    opacity: 0.25; filter: grayscale(0.6);
+  }
+}
+.star-core {
+  width: 100%; height: 100%; border-radius: $radius-full;
+  animation: twinkle 4s ease-in-out infinite;
+}
+.star-node:nth-child(2n) .star-core { animation-delay: 0.5s; animation-duration: 3.5s; }
+.star-node:nth-child(3n) .star-core { animation-delay: 1.2s; animation-duration: 4.5s; }
+.star-node:nth-child(5n) .star-core { animation-delay: 2s; animation-duration: 3s; }
+
+// ── Float / Zoom / Fullview ──
+.float-label {
+  position: absolute; top: 24rpx; right: 24rpx;
+  padding: 8rpx 20rpx; border-radius: $radius-full;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10rpx);
+  font-size: $fs-label-sm; color: rgba(255,255,255,0.6);
+}
+
+.zoom-ctrls {
+  position: absolute; bottom: 20rpx; right: 20rpx; display: flex; gap: 12rpx; z-index: 10;
 }
 .zoom-btn {
   width: 64rpx; height: 64rpx; border-radius: $radius-full;
-  background-color: rgba($color-surface-container-lowest, 0.85);
-  backdrop-filter: blur(10rpx); box-shadow: $shadow-healing;
-  display: flex; align-items: center; justify-content: center;
-}
-.zoom-icon { font-size: 36rpx; color: $color-primary; font-weight: 600; }
-.zoom-reset-icon { font-size: 28rpx; }
-.zoom-dim { opacity: 0.35; }
-
-.float-label {
-  position: absolute;
-  top: 16rpx; right: 16rpx; z-index: 15;
-  background-color: rgba($color-surface-container-lowest, 0.85);
-  padding: 12rpx 28rpx; border-radius: $radius-full;
-  box-shadow: $shadow-healing;
+  background: rgba(255,255,255,0.08);
   backdrop-filter: blur(10rpx);
-}
-.float-text { font-size: $fs-label-sm; color: $color-primary; font-weight: 600; }
-
-.stats-section {
-  padding: 0 $sp-page-margin;
+  display: flex; align-items: center; justify-content: center;
+  font-size: $fs-body-md; color: rgba(255,255,255,0.6);
+  &:active { background: rgba(255,255,255,0.15); }
 }
 
-.stats-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 32rpx;
+.fullview-btn {
+  position: absolute; top: 24rpx; right: 200rpx;
+  padding: 8rpx 20rpx; border-radius: $radius-full;
+  background: rgba($color-primary, 0.3);
+  backdrop-filter: blur(10rpx);
+  &:active { background: rgba($color-primary, 0.5); }
+}
+.fullview-text { font-size: $fs-label-sm; color: rgba(255,255,255,0.85); font-weight: 600; }
+
+// ── Stats ──
+.stats-section { padding: 32rpx $sp-page-margin; background: #0a0f1a; }
+.stats-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24rpx; }
+.stats-title { font-size: $fs-headline-sm; font-weight: 600; color: rgba(255,255,255,0.9); }
+.stats-time { font-size: $fs-label-sm; color: rgba(255,255,255,0.4); }
+.stats-grid { display: flex; gap: $sp-stack-gap; }
+.stat-card { flex: 1; padding: 28rpx; border-radius: $radius-md; background: rgba(255,255,255,0.04); }
+.stat-number { font-size: $fs-headline-md; font-weight: 700; color: rgba($color-primary, 0.9); }
+.stat-label { display: block; font-size: $fs-label-sm; color: rgba(255,255,255,0.5); margin-top: 8rpx; }
+.stat-bar { height: 6rpx; background: rgba(255,255,255,0.08); border-radius: 3rpx; overflow: hidden; margin-top: 16rpx; }
+.stat-fill { height: 100%; background: rgba($color-primary, 0.6); border-radius: 3rpx; transition: width 0.5s ease; }
+.stat-dots { display: flex; gap: 16rpx; margin-top: 12rpx; }
+.stat-dot { width: 24rpx; height: 24rpx; border-radius: $radius-full; }
+.stat-dot.active { background: rgba($color-primary, 0.7); }
+.stat-dot.half { background: rgba($color-primary, 0.3); }
+.stat-dot.dim { background: rgba(255,255,255,0.08); }
+
+// ── Cards ──
+.section { padding: 0 $sp-page-margin; margin-bottom: $sp-module-gap; }
+.entry-card {
+  display: flex; align-items: center; gap: 24rpx;
+  padding: 36rpx; border-radius: $radius-md;
+  background: rgba(255,255,255,0.04);
+  &:active { transform: scale(0.98); }
+}
+.entry-icon { font-size: 48rpx; }
+.entry-info { flex: 1; }
+.entry-title { display: block; font-size: $fs-body-lg; color: rgba(255,255,255,0.85); }
+.entry-hint { font-size: $fs-label-sm; color: rgba(255,255,255,0.4); }
+.entry-arrow { font-size: 48rpx; color: rgba(255,255,255,0.3); }
+
+.insight-card {
+  padding: 36rpx; border-radius: $radius-md;
+  background: linear-gradient(135deg, rgba($color-primary-container, 0.08) 0%, rgba($color-secondary-container, 0.06) 100%);
+}
+.insight-header { display: flex; align-items: center; gap: 12rpx; margin-bottom: 16rpx; }
+.insight-emoji { font-size: 36rpx; }
+.insight-title { font-size: $fs-body-md; font-weight: 600; color: rgba(255,255,255,0.7); }
+.insight-text { font-size: $fs-body-md; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+.bottom-spacer { height: 200rpx; }
+
+// ── Animations ──
+@keyframes twinkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  30% { opacity: 0.55; transform: scale(0.94); }
+  60% { opacity: 0.85; transform: scale(1.03); }
+  80% { opacity: 1; transform: scale(1); }
+}
+@keyframes edgePulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.55; }
+}
+@keyframes hubGlow {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.2); }
 }
 
-.stats-title {
-  font-size: $fs-headline-sm;
-  font-weight: 600;
-  color: $color-on-surface;
-}
-
-.stats-subtitle {
-  font-size: $fs-label-md;
-  color: rgba($color-on-surface-variant, 0.6);
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32rpx;
-  margin-bottom: 32rpx;
-}
-
-.stat-card {
-  padding: 40rpx;
-}
-
-.stat-label-sm {
-  display: block;
-  font-size: $fs-label-sm;
-  color: rgba($color-on-surface-variant, 0.5);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 8rpx;
-}
-
-.stat-value {
-  display: block;
-  font-size: $fs-headline-md;
-  font-weight: 600;
-  margin-bottom: 24rpx;
-}
-
-.text-primary { color: $color-primary; }
-.text-tertiary { color: $color-tertiary; }
-
-.stat-bar {
-  width: 100%;
-  height: 8rpx;
-  background-color: $color-surface-container;
-  border-radius: $radius-full;
-  overflow: hidden;
-}
-
-.stat-bar-fill {
-  height: 100%;
-  background-color: $color-primary-container;
-  border-radius: $radius-full;
-}
-
-.dot-indicators {
-  display: flex;
-  gap: 8rpx;
-}
-
-.dot {
-  width: 16rpx;
-  height: 16rpx;
-  border-radius: $radius-full;
-}
-
-.dot.active { background-color: $color-tertiary; }
-.dot.half { background-color: rgba($color-tertiary, 0.4); }
-.dot.dim { background-color: rgba($color-tertiary, 0.2); }
-
-.inspire-card {
-  display: flex;
-  padding: 48rpx;
-  background-color: rgba($color-secondary-container, 0.3);
-  border-radius: $radius-default;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: $sp-module-gap;
-}
-
-.inspire-body { flex: 1; z-index: 1; }
-
-.inspire-title {
-  display: block;
-  font-size: $fs-headline-sm;
-  font-weight: 600;
-  color: $color-secondary;
-  margin-bottom: 16rpx;
-}
-
-.inspire-text {
-  font-size: $fs-body-md;
-  color: rgba($color-on-secondary-container, 0.8);
-  max-width: 480rpx;
-}
-
-.inspire-decor {
-  position: absolute;
-  bottom: -16rpx;
-  right: -16rpx;
-  opacity: 0.2;
-}
-
-.inspire-mascot { font-size: 256rpx; }
-
-.worldview-card {
-  display: flex; align-items: center; justify-content: space-between;
-  margin: 0 $sp-page-margin 32rpx; padding: 36rpx 40rpx;
-  background-color: $color-surface-container-lowest;
-  border-radius: $radius-default; box-shadow: $shadow-healing;
-}
-.wv-left { display: flex; align-items: center; gap: 28rpx; }
-.wv-icon { font-size: 48rpx; color: $color-primary; }
-.wv-body { display: flex; flex-direction: column; gap: 8rpx; }
-.wv-title { font-size: $fs-body-lg; font-weight: 600; color: $color-on-surface; }
-.wv-desc { font-size: $fs-label-md; color: rgba($color-on-surface-variant, 0.6); }
-.wv-arrow { font-size: 44rpx; color: rgba($color-on-surface-variant, 0.4); }
-
-.scroll-area {
-  height: 100vh;
-  padding-bottom: 180rpx;
-  box-sizing: border-box;
-}
-
+.scroll-area { height: 100vh; padding-bottom: 180rpx; box-sizing: border-box; }
+.pressable:active, .pressable-subtle:active { opacity: 0.7; }
 </style>

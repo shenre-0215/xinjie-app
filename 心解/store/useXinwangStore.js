@@ -326,3 +326,63 @@ export async function refreshRecommendations() {
     }
   }
 }
+
+// ── 思考链 → 心网节点自动标题 & 情绪推断 ──
+
+const EMOTION_KEYWORDS = {
+  '释然': ['释然', '接纳', '放下', '和解', '允许'],
+  '平静': ['平静', '宁静', '冷静', '正念', '安住'],
+  '喜悦': ['喜悦', '开心', '快乐', '幸福', '感恩'],
+  '成长': ['成长', '进步', '突破', '改变', '新生'],
+  '悲伤': ['悲伤', '难过', '失去', '告别', '遗憾'],
+  '失落': ['失落', '沮丧', '失望', '低落'],
+  '愤怒': ['愤怒', '生气', '不满', '委屈', '不公'],
+  '焦虑': ['焦虑', '紧张', '担忧', '压力', '不安'],
+  '迷茫': ['迷茫', '困惑', '不确定', '徘徊', '迷失'],
+  '探索': ['探索', '好奇', '发现', '尝试', '寻找']
+}
+
+export function generateNodeTitle(record) {
+  if (record.title) return record.title
+  if (record.content) {
+    const firstSentence = record.content.split(/[。！？\n]/)[0].trim()
+    if (firstSentence.length <= 20) return firstSentence
+    return firstSentence.slice(0, 18) + '...'
+  }
+  const d = record.date ? new Date(record.date) : new Date()
+  return `${d.getMonth() + 1}月${d.getDate()}日 思考`
+}
+
+export function inferEmotion(record) {
+  if (!record.tags && !record.content) return '探索'
+  const text = [(record.tags || []).join(' '), record.content || ''].join(' ')
+  for (const [emotion, keywords] of Object.entries(EMOTION_KEYWORDS)) {
+    if (keywords.some(k => text.includes(k))) return emotion
+  }
+  return '探索'
+}
+
+export function extractSubtitle(record) {
+  if (record.tags && record.tags.length) {
+    return record.tags.slice(0, 2).join(' · ')
+  }
+  return ''
+}
+
+export function onThinkingChainClosed(record) {
+  const title = generateNodeTitle(record)
+  const emotion = inferEmotion(record)
+  const subtitle = extractSubtitle(record)
+
+  const node = {
+    label: title,
+    type: 'thinking',
+    status: 'completed',
+    delta: record.delta,
+    sourceId: record.id,
+    sourceType: 'zhiji',
+    emotion,
+    subtitle
+  }
+  return addNodeAutoConnect(node)
+}

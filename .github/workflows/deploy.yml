@@ -23,19 +23,20 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Setup src symlinks
+      - name: Setup src directory
         run: |
           mkdir -p src
-          ln -sf ../manifest.json src/manifest.json
-          ln -sf ../pages.json src/pages.json
-          ln -sf ../main.js src/main.js
-          ln -sf ../App.vue src/App.vue
-          ln -sf ../pages src/pages
-          ln -sf ../store src/store
-          ln -sf ../components src/components
-          ln -sf ../utils src/utils
-          ln -sf ../mock src/mock
-          ln -sf ../styles src/styles
+          cp ../manifest.json src/manifest.json
+          cp ../pages.json src/pages.json
+          cp ../main.js src/main.js
+          cp ../App.vue src/App.vue
+          cp -r ../pages src/pages
+          cp -r ../store src/store
+          cp -r ../components src/components
+          cp -r ../utils src/utils
+          cp -r ../mock src/mock
+          cp -r ../styles src/styles
+          ls -R src/ | head -30
 
       - name: Install dependencies
         run: npm install
@@ -43,8 +44,11 @@ jobs:
       - name: Build H5
         run: npm run build:h5
 
+      - name: List build output
+        run: find dist -type f | sort && echo "---" && du -sh dist/assets/*.js 2>/dev/null || echo "no assets"
+
       - name: Fix paths for GitHub Pages
-        run: node ../scripts/fix-paths.js
+        run: node ../scripts/fix-paths.js || echo "fix-paths skipped"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

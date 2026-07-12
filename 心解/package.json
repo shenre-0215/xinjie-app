@@ -5,8 +5,8 @@
   "description": "心解 - 治愈系心理健康小程序",
   "scripts": {
     "dev:h5": "npx vite --port 5173 --open",
-    "build:h5": "npx vite build && node scripts/wrap-phone-frame.js",
-    "preview:h5": "npx vite preview --port 53401",
+    "build:h5": "npx vite build && node ../scripts/wrap-phone-frame.js",
+    "preview:h5": "npx vite preview --port 53401 --outDir dist",
     "dev:mp-weixin": "uni",
     "build:mp-weixin": "uni build",
     "dev:mp-alipay": "uni -p mp-alipay",

@@ -8,7 +8,7 @@
 const fs = require('fs')
 const path = require('path')
 
-const buildDir = process.argv[2] || path.join(__dirname, '..', '心解', 'dist', 'build', 'h5')
+const buildDir = process.argv[2] || path.join(__dirname, '..', '心解', 'dist')
 const indexPath = path.join(buildDir, 'index.html')
 
 if (!fs.existsSync(indexPath)) {

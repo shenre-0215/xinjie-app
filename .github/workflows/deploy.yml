@@ -23,6 +23,20 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Setup src symlinks
+        run: |
+          mkdir -p src
+          ln -sf ../manifest.json src/manifest.json
+          ln -sf ../pages.json src/pages.json
+          ln -sf ../main.js src/main.js
+          ln -sf ../App.vue src/App.vue
+          ln -sf ../pages src/pages
+          ln -sf ../store src/store
+          ln -sf ../components src/components
+          ln -sf ../utils src/utils
+          ln -sf ../mock src/mock
+          ln -sf ../styles src/styles
+
       - name: Install dependencies
         run: npm ci
 
@@ -36,6 +50,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: 心解/dist/build/h5
+          publish_dir: 心解/dist
           publish_branch: gh-pages
           force_orphan: true
